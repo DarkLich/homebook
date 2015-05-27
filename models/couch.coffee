@@ -9,15 +9,15 @@ couch = ->
     auth: { username: 'root', password: 'StrongPassWord' }
   )
 #  console.log con
-  db = con.database('starwars')
+  db = con.database('h_users')
   db.create((err)->
     console.log 'err'
     console.log err
   )
 
   db.save 'vader', {
-    name: 'darth'
-    force: 'dark'
+    name: 'admin'
+    pass: 'dark'
   }, (err, res) ->
     # Handle response
     return

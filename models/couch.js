@@ -19,14 +19,14 @@
         password: 'StrongPassWord'
       }
     });
-    db = con.database('starwars');
+    db = con.database('h_users');
     db.create(function(err) {
       console.log('err');
       return console.log(err);
     });
     db.save('vader', {
-      name: 'darth',
-      force: 'dark'
+      name: 'admin',
+      pass: 'dark'
     }, function(err, res) {});
     return db.exists(function(err, exists) {
       if (err) {
