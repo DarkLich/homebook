@@ -2,7 +2,12 @@ extends layout
 
 block content
   h1= title
-  p Катя и Андрей нубки
-  
-  хаха!!!!
-sdfdfффф
+  if username
+    p !{username}
+  else
+    p Привет, неизвестный
+  a(href='http://localhost:3000/user/login') login
+  p
+  a(href='http://localhost:3000/user/register') register
+  p
+  a(href='http://localhost:3000/user/logout') logout

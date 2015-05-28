@@ -11,8 +11,12 @@
     "cradle": "^0.6.9",
     "debug": "~2.2.0",
     "express": "~4.12.4",
+    "express-session": "^1.11.2",
     "jade": "~1.9.2",
     "morgan": "~1.5.3",
+    "passport": "^0.2.2",
+    "passport-local": "^1.0.0",
+    "require-tree": "^1.0.1",
     "serve-favicon": "~2.2.1",
     "unit.js": "^2.0.0"
   }

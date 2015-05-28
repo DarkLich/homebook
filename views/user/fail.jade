@@ -1,0 +1,12 @@
+extends ../layout
+
+block content
+  h4 Не удалось залогиниться, попробуйте еще раз
+  form(action='/user/login' method='post')
+    fieldset
+      label(for='name') UserName
+      input(type='text' name='username' placeholder='Your user name')
+      label(for='password') Password
+      input(type='password' name='password' placeholder='Your Password')
+      button(type='Register')
+

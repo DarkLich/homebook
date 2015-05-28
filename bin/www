@@ -7,9 +7,7 @@
 var app = require('../app');
 var debug = require('debug')('homebook:server');
 var http = require('http');
-
-var couch = require('../models/couch');
-couch()
+var init = require('./init');
 
 /**
  * Get port from environment and store in Express.
