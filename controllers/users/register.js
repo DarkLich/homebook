@@ -5,15 +5,15 @@
   /**
    * Module dependencies.
    */
-  var couch;
+  var users_db;
 
-  couch = require('../../models/couch');
+  users_db = require('../../models/users_db');
 
   module.exports = function(req, res, next) {
     console.log(req.body.email);
-    couch.users.get(req.body.email, function(err, doc) {
+    users_db.users.get(req.body.email, function(err, doc) {
       if (err && err.error === 'not_found') {
-        return couch.users.save(req.body.email, {
+        return users_db.users.save(req.body.email, {
           email: req.body.email,
           password: req.body.password
         }, function(err, res) {});

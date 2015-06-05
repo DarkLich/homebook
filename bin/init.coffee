@@ -1,11 +1,11 @@
 express = require('express')
-couch = require('../models/couch')
+users_db = require('../models/users_db')
 
 app = express()
 
 console.log 'name_______'
 
-couch.init()
+#couch.init()
 passport = require('passport')
 LocalStrategy = require('passport-local').Strategy
 passport.use new LocalStrategy({
@@ -15,7 +15,7 @@ passport.use new LocalStrategy({
     console.log 'PASSSPORT'
     console.log email
     console.log password
-    couch.users.get email, (err, doc) ->
+    users_db.users.get email, (err, doc) ->
       console.log '!doc!'
       console.log doc
       if err
@@ -36,7 +36,7 @@ passport.serializeUser (user, done) ->
   return
 passport.deserializeUser (id, done) ->
   # query the current user from database
-  couch.users.get(id, (err, doc) ->
+  users_db.users.get(id, (err, doc) ->
     if err
       return done new Error('User ' + id + ' does not exist')
 
