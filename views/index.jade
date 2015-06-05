@@ -1,17 +1,17 @@
 extends layout
 
 block content
-  h1= title
-  p Привет,
-    if user
-      | !{user.email}
-    else
-      | неизвестный
-    a(href='http://localhost:3000/user/login') login
-  p.col-md-2
-    a(href='http://localhost:3000/user/register') register
-  p.col-md-2
-    a(href='http://localhost:3000/user/logout') logout
+  //h1= title
+  //p Привет,
+  //  if user
+  //    | !{user.email}
+  //  else
+  //    | неизвестный
+  //  a(href='http://localhost:3000/user/login') login
+  //p.col-md-2
+  //  a(href='http://localhost:3000/user/register') register
+  //p.col-md-2
+  //  a(href='http://localhost:3000/user/logout') logout
 
   if user
     p

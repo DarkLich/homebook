@@ -1,32 +1,16 @@
 extends ../layout
 
 block content
-  h4 Login
+  h4 Вход
   if error
-    h2= error
-  //form(action='/user/login' method='post')
-  //  fieldset
-  //    label(for='name') UserName
-  //    input(type='text' name='username' placeholder='Your user name')
-  //    label(for='password') Password
-  //    input(type='password' name='password' placeholder='Your Password')
-  //    button(type='Register')
+    h4(style="color: red")= error
 
-
-  form(action='/user/login' method='post')
+  form.col-md-offset-2.col-md-8(action='/user/login' method='post')
     .form-group
       label(for='email') Email
-      input#email.form-control(name='email', type='text', placeholder='Enter email')
+      input#email.form-control(name='email', type='email', placeholder='Enter email')
     .form-group
-      label(for='password') Password
-      input#password.form-control(name='password', type='password', placeholder='Password')
-    .form-group
-      label(for='exampleInputFile') File input
-      input#exampleInputFile(type='file')
-      p.help-block Example block-level help text here.
-    .checkbox
-      label
-        input(type='checkbox')
-        |  Check me out
+      label(for='password') Пароль
+      input#password.form-control(name='password', type='password', placeholder='Пароль')
 
     button.btn.btn-default(type='submit') Submit

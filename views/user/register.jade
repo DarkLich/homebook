@@ -1,12 +1,21 @@
 extends ../layout
 
+block scripts
+  script(src='/js/registration.js')
+
 block content
-  h4 Register your account
-  form(action='/user/register' method='post')
-    fieldset
-      label(for='name') Email
-      input(type='text' name='email' placeholder='Your user email')
-      label(for='password') Password
-      input(type='password' name='password' placeholder='Your Password')
-      button(type='Register')
+  h4 Регистрация
+  .container-fluid
+    form#register_form.col-md-offset-2.col-md-8(action='/user/register' method='post')
+      .form-group
+        label(for='email') Email
+        input#email.form-control(name='email', type='email', placeholder='Enter email')
+      .form-group
+        label(for='password') Пароль
+        input#password.form-control(name='password', type='password', placeholder='Пароль')
+      .form-group
+        label(for='password_confirm') Подтверждение пароля
+        input#password_confirm.form-control(name='password_confirm', type='password', placeholder='Подтверждение пароля')
+      .form-group
+        button.btn.btn-default(type='submit') Submit
 
