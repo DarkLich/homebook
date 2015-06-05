@@ -30,6 +30,15 @@ app.use(session({ secret: 'SECRET', resave: true, saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());
 
+// Для проверки авторизации в темплейтах
+app.use(function(req, res, next) {
+    console.log('isAuth')
+    console.log(req)
+    res.locals.user = req.user;
+    //res.locals.login = req.isAuthenticated();
+    next();
+});
+
 app.use('/', routes);
 app.use('/user', user);
 

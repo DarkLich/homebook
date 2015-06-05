@@ -10,11 +10,11 @@
   couch = require('../../models/couch');
 
   module.exports = function(req, res, next) {
-    console.log(req.body.username);
-    couch.users.get(req.body.username, function(err, doc) {
+    console.log(req.body.email);
+    couch.users.get(req.body.email, function(err, doc) {
       if (err && err.error === 'not_found') {
-        return couch.users.save(req.body.username, {
-          username: req.body.username,
+        return couch.users.save(req.body.email, {
+          email: req.body.email,
           password: req.body.password
         }, function(err, res) {});
       }

@@ -5,9 +5,10 @@
   /**
    * Module dependencies.
    */
-  module.exports = function(req, res) {
+  module.exports = function(req, res, next) {
     req.logout();
     res.redirect('/');
+    next();
   };
 
 }).call(this);

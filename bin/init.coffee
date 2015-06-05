@@ -1,4 +1,7 @@
+express = require('express')
 couch = require('../models/couch')
+
+app = express()
 
 console.log 'name_______'
 
@@ -6,15 +9,15 @@ couch.init()
 passport = require('passport')
 LocalStrategy = require('passport-local').Strategy
 passport.use new LocalStrategy({
-    usernameField: 'username'
+    usernameField: 'email'
     passwordField: 'password'
-  }, (username, password, done) ->
+  }, (email, password, done) ->
     console.log 'PASSSPORT'
-    console.log username
+    console.log email
     console.log password
-    couch.users.get username, (err, doc) ->
-#      console.log '!doc!'
-#      console.log doc
+    couch.users.get email, (err, doc) ->
+      console.log '!doc!'
+      console.log doc
       if err
         done(err)
       else if doc

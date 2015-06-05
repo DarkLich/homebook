@@ -6,7 +6,7 @@ var users = require('../controllers/users');
 /* GET users listing. */
 router.post('/login', users.login,
     function(req, res, next) {
-        res.render('index', {title: 'Express', username: req.user.username});
+        res.render('index', {title: 'Express'});
     });
 
 router.get('/login', function(req, res, next) {
@@ -18,7 +18,7 @@ router.get('/register', function(req, res, next) {
 });
 router.post('/register', users.register,
     function(req, res, next) {
-    res.render('index', { title: 'Express', username: req.user.username });
+    res.render('index', { title: 'Express' });
 });
 router.get('/logout', users.logout);
 
@@ -41,7 +41,7 @@ function requireAuth(req, res, next){
 }
 
 function adminHandler(req, res, next){
-    console.log ('ADMIN!!!!!')
+    console.log ('ADMIN!!!!!');
     console.log (req.user);
 }
 

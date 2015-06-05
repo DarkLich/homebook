@@ -6,7 +6,8 @@
 
 # End of dependencies.
 
-module.exports = (req, res) ->
+module.exports = (req, res, next) ->
   req.logout()
   res.redirect '/'
+  next()
   return

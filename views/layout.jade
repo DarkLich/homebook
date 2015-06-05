@@ -2,6 +2,12 @@ doctype html
 html
   head
     title= title
+
+    link(rel='stylesheet', href='/libs/bootstrap/css/bootstrap.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
+
+    script(src='/libs/jquery-2.1.4.js')
+    script(src='/libs/bootstrap/js/bootstrap.js')
   body
+    include ./header.jade
     block content

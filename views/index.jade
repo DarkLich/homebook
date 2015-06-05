@@ -2,12 +2,20 @@ extends layout
 
 block content
   h1= title
-  if username
-    p !{username}
+  p Привет,
+    if user
+      | !{user.email}
+    else
+      | неизвестный
+    a(href='http://localhost:3000/user/login') login
+  p.col-md-2
+    a(href='http://localhost:3000/user/register') register
+  p.col-md-2
+    a(href='http://localhost:3000/user/logout') logout
+
+  if user
+    p
+      | you are logged in
   else
-    p Привет, неизвестный
-  a(href='http://localhost:3000/user/login') login
-  p
-  a(href='http://localhost:3000/user/register') register
-  p
-  a(href='http://localhost:3000/user/logout') logout
+    p
+      | you are NOT!
