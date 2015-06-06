@@ -63,7 +63,7 @@
 
   app.use('/user', user);
 
-  app.use('bill', bill);
+  app.use('/bill', bill);
 
   app.use(function(req, res, next) {
     var err;

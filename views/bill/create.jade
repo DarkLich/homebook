@@ -1,0 +1,63 @@
+extends ../layout
+
+block scripts
+  script(src='/js/create_bill.js')
+
+block content
+  h4 Создать чек
+  if error
+    h4(style="color: red")= error
+  .container-fluid
+    form#create_bill.form-horizontal.col-md-offset-2.col-md-8(action='/bill/create' method='post')
+      .form-group
+        label.col-md-2.control-label Магазин
+        .col-md-10
+          select.form-control(name='shop')
+            option df
+      .form-group
+        label.col-md-2.control-label Дата
+        .col-md-10
+          input.col-md-2.form-control(name='date', type='date')
+
+      .form-group
+        .col-md-4
+          label Наименование
+        .col-md-2
+          label Цена
+        .col-md-2
+          label За шт.
+        .col-md-2
+          label Количество
+        .col-md-2
+          label Сумма
+
+      .form-group
+        .col-md-4
+          input.form-control(name='title', type='text')
+        .col-md-2
+          input.form-control(name='price', type='number')
+        .col-md-2.checkbox
+          label
+            input(name='date', type='checkbox')
+        .col-md-2
+          input.form-control(name='count', type='text')
+        .col-md-2
+          input.form-control(name='sum', type='text')
+      .form-group
+        .col-md-4
+          input.form-control(name='title', type='text')
+        .col-md-2
+          input.form-control(name='price', type='number')
+        .col-md-2.checkbox
+          label
+            input(name='date', type='checkbox')
+        .col-md-2
+          input.form-control(name='count', type='text')
+        .col-md-2
+          input.form-control(name='sum', type='text')
+
+
+
+
+
+      button.btn.btn-default(type='submit') Submit

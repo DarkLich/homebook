@@ -39,7 +39,7 @@ app.use (req, res, next) ->
   return
 app.use '/', routes
 app.use '/user', user
-app.use 'bill', bill
+app.use '/bill', bill
 # catch 404 and forward to error handler
 app.use (req, res, next) ->
   err = new Error('Not Found')

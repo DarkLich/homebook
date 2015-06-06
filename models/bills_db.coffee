@@ -11,7 +11,7 @@ bills_db.exists (err, exists)->
     console.log 'database does not exists.'
     bills_db.create((err)->
       if err
-        console.log 'не удалось создать базу h_users'
+        console.log 'не удалось создать базу h_bills'
         console.log err
     )
 
