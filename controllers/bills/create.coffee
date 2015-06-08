@@ -10,7 +10,8 @@ module.exports = (req, res, next) ->
   if req.user
     body = req.body
     bill =
-      shop: req.body.shop
+      shop_title: req.body.shop
+      shop_id: req.body.shop_id
       date: req.body.date
       creator: req.user._id
       buyer: "common"
@@ -53,7 +54,6 @@ module.exports = (req, res, next) ->
   return
 
 savePurchase = (purchase, count, bill)->
-  console.log 'aaaaa'
   saveToDb = ()->
     purchases_db.purchases.save purchase, (err, res) ->
       console.log res
@@ -72,8 +72,6 @@ savePurchase = (purchase, count, bill)->
         saveToDb()
     else
       saveToDb()
-
-
 
   return
 

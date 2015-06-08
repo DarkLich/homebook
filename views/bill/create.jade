@@ -11,12 +11,16 @@ block content
     form#create_bill.form-horizontal(action='/bill/create' method='post')
       .form-group
         label.col-md-2.col-md-offset-2.control-label Магазин
+        .col-md-3
+          .input-group
+            input.form-control.shop-title(name="shop" type="text", data-provide="typeahead", autocomplete="off")
+            span.input-group-btn
+              button.btn.btn-default.add-shop(type="button" disabled=true)
+                span.glyphicon.glyphicon-plus
+        input.shop-id(name='shop_id', type='hidden')
+        label.col-md-2.control-label Дата
         .col-md-2
-          select.form-control(name='shop')
-            option df
-        label.col-md-2.col-md-offset-1.control-label Дата
-        .col-md-2
-          input.form-control(name='date', type='date')
+          input#bill_date.form-control(name='date', type='date')
 
       .form-group
         .col-md-3.col-md-offset-1
@@ -33,7 +37,7 @@ block content
         .form-group.product-params.hidden-group
           .col-md-3.col-md-offset-1
             .input-group
-              input.form-control.product-title.typeahead(name="title" type="text", data-provide="typeahead", autocomplete="off")
+              input.form-control.product-title(name="title" type="text", data-provide="typeahead", autocomplete="off")
               span.input-group-btn
                 button.btn.btn-default.add-purchase(type="button" disabled=true)
                   span.glyphicon.glyphicon-plus

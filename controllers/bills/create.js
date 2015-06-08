@@ -16,7 +16,8 @@
     if (req.user) {
       body = req.body;
       bill = {
-        shop: req.body.shop,
+        shop_title: req.body.shop,
+        shop_id: req.body.shop_id,
         date: req.body.date,
         creator: req.user._id,
         buyer: "common",
@@ -50,7 +51,6 @@
 
   savePurchase = function(purchase, count, bill) {
     var saveToDb;
-    console.log('aaaaa');
     saveToDb = function() {
       return purchases_db.purchases.save(purchase, function(err, res) {
         console.log(res);

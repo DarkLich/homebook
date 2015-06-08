@@ -11,6 +11,7 @@ list = require('./routes/list')
 user = require('./routes/user')
 bill = require('./routes/bill')
 product = require('./routes/product')
+shop = require('./routes/shop')
 
 app = express()
 # view engine setup
@@ -44,6 +45,7 @@ app.use '/list', list
 app.use '/user', user
 app.use '/bill', bill
 app.use '/product', product
+app.use '/shop', shop
 # catch 404 and forward to error handler
 app.use (req, res, next) ->
   err = new Error('Not Found')

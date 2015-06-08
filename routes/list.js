@@ -10,6 +10,8 @@
 
   router.get('/products', lists.products, function(req, res, next) {});
 
+  router.get('/shops', lists.shops, function(req, res, next) {});
+
   module.exports = router;
 
 }).call(this);
