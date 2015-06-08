@@ -8,11 +8,7 @@
 
   users = require('../controllers/users');
 
-
-  /* GET users listing. */
-
   requireAuth = function(req, res, next) {
-    console.log(req.isAuthenticated());
     if (!req.isAuthenticated()) {
       req.session.messages = 'You need to login to view this page';
       res.redirect('/user/login');
@@ -21,10 +17,7 @@
     }
   };
 
-  adminHandler = function(req, res, next) {
-    console.log('ADMIN!!!!!');
-    console.log(req.user);
-  };
+  adminHandler = function(req, res, next) {};
 
   router.post('/login', users.login, function(req, res, next) {
     res.render('index', {

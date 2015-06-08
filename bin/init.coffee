@@ -12,11 +12,12 @@ passport.use new LocalStrategy({
     usernameField: 'email'
     passwordField: 'password'
   }, (email, password, done) ->
-    console.log 'PASSSPORT'
-    console.log email
-    console.log password
+#    console.log 'PASSSPORT'
+#    console.log email
+#    console.log password
     users_db.users.get email, (err, doc) ->
       console.log '!doc!'
+
       console.log doc
       if err
         done(err)

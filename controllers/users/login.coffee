@@ -1,7 +1,6 @@
 'use strict'
 
 passport = require('passport')
-# End of dependencies.
 
 module.exports = (req, res, next) ->
   console.log 'someone trying to login'

@@ -12,13 +12,7 @@ bills_db.exists (err, exists)->
     bills_db.create((err)->
       if err
         console.log 'не удалось создать базу h_bills'
-        console.log err
+#        console.log err
     )
 
-#  db.save 'vader', {
-#    name: 'admin'
-#    pass: 'dark'
-#  }, (err, res) ->
-#    # Handle response
-#    return
 module.exports.bills = bills_db

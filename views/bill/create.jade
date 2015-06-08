@@ -8,56 +8,46 @@ block content
   if error
     h4(style="color: red")= error
   .container-fluid
-    form#create_bill.form-horizontal.col-md-offset-2.col-md-8(action='/bill/create' method='post')
+    form#create_bill.form-horizontal(action='/bill/create' method='post')
       .form-group
-        label.col-md-2.control-label Магазин
-        .col-md-10
+        label.col-md-2.col-md-offset-2.control-label Магазин
+        .col-md-2
           select.form-control(name='shop')
             option df
-      .form-group
-        label.col-md-2.control-label Дата
-        .col-md-10
-          input.col-md-2.form-control(name='date', type='date')
+        label.col-md-2.col-md-offset-1.control-label Дата
+        .col-md-2
+          input.form-control(name='date', type='date')
 
       .form-group
-        .col-md-4
+        .col-md-3.col-md-offset-1
           label Наименование
         .col-md-2
           label Цена
-        .col-md-2
-          label За шт.
+        .col-md-1
+          label Мера
         .col-md-2
           label Количество
         .col-md-2
           label Сумма
+      fieldset.products
+        .form-group.product-params.hidden-group
+          .col-md-3.col-md-offset-1
+            .input-group
+              input.form-control.product-title.typeahead(name="title" type="text", data-provide="typeahead", autocomplete="off")
+              span.input-group-btn
+                button.btn.btn-default.add-purchase(type="button" disabled=true)
+                  span.glyphicon.glyphicon-plus
+            //input.form-control.product-title.typeahead(name="title" type="text", data-provide="typeahead", autocomplete="off")
+            input.product-id(name='product_id', type='hidden')
+          .col-md-2
+            input.form-control(name='price', type='number')
+          .col-md-1
+            select.form-control(name='measure')
+              option(value='kg') кг.
+              option(value='pi') шт.
+          .col-md-2
+            input.form-control(name='count', type='text')
+          .col-md-2
+            input.form-control(name='sum', type='text')
 
-      .form-group
-        .col-md-4
-          input.form-control(name='title', type='text')
-        .col-md-2
-          input.form-control(name='price', type='number')
-        .col-md-2.checkbox
-          label
-            input(name='date', type='checkbox')
-        .col-md-2
-          input.form-control(name='count', type='text')
-        .col-md-2
-          input.form-control(name='sum', type='text')
-      .form-group
-        .col-md-4
-          input.form-control(name='title', type='text')
-        .col-md-2
-          input.form-control(name='price', type='number')
-        .col-md-2.checkbox
-          label
-            input(name='date', type='checkbox')
-        .col-md-2
-          input.form-control(name='count', type='text')
-        .col-md-2
-          input.form-control(name='sum', type='text')
-
-
-
-
-
-      button.btn.btn-default(type='submit') Submit
+      button.col-md-offset-1.btn.btn-default(type='submit') Submit

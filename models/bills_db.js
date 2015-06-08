@@ -15,8 +15,7 @@
       console.log('database does not exists.');
       return bills_db.create(function(err) {
         if (err) {
-          console.log('не удалось создать базу h_bills');
-          return console.log(err);
+          return console.log('не удалось создать базу h_bills');
         }
       });
     }

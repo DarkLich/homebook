@@ -7,8 +7,10 @@ bodyParser = require('body-parser')
 session = require('express-session')
 passport = require('passport')
 routes = require('./routes/index')
+list = require('./routes/list')
 user = require('./routes/user')
 bill = require('./routes/bill')
+product = require('./routes/product')
 
 app = express()
 # view engine setup
@@ -31,15 +33,17 @@ app.use passport.initialize()
 app.use passport.session()
 # Для проверки авторизации в темплейтах
 app.use (req, res, next) ->
-  console.log 'isAuth'
-  console.log req
+#  console.log 'isAuth'
+#  console.log req
   res.locals.user = req.user
   #res.locals.login = req.isAuthenticated();
   next()
   return
 app.use '/', routes
+app.use '/list', list
 app.use '/user', user
 app.use '/bill', bill
+app.use '/product', product
 # catch 404 and forward to error handler
 app.use (req, res, next) ->
   err = new Error('Not Found')

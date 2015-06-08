@@ -18,9 +18,6 @@
     usernameField: 'email',
     passwordField: 'password'
   }, function(email, password, done) {
-    console.log('PASSSPORT');
-    console.log(email);
-    console.log(password);
     users_db.users.get(email, function(err, doc) {
       console.log('!doc!');
       console.log(doc);
