@@ -61,7 +61,7 @@
   app.use(passport.session());
 
   app.use(function(req, res, next) {
-    res.locals.app_version = '0.0.3';
+    res.locals.app_version = '0.0.4';
     res.locals.user = req.user;
     next();
   });
