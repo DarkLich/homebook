@@ -34,8 +34,6 @@ app.use passport.initialize()
 app.use passport.session()
 # Для проверки авторизации в темплейтах
 app.use (req, res, next) ->
-#  console.log 'isAuth'
-#  console.log req
   res.locals.user = req.user
   #res.locals.login = req.isAuthenticated();
   next()
