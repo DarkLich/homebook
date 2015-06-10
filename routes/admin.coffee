@@ -21,7 +21,7 @@ router.get '/restart', (req, res, next) ->
   #  env:_.extend(process.env, { PATH: process.env.PATH + ':/usr/local/bin' })
   #})
 
-  spawn.exec 'sudo /usr/local/etc/rc.d/homebook restart', (error, stdout, stderr) ->
+  spawn.exec 'sudo /usr/sbin/service homebook restart', (error, stdout, stderr) ->
     console.log 'stdout: ' + stdout
     console.log 'stderr: ' + stderr
     if error != null

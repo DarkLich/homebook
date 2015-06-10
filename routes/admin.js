@@ -14,7 +14,7 @@
 
   router.get('/restart', function(req, res, next) {
     console.log('restart');
-    spawn.exec('sudo /usr/local/etc/rc.d/homebook restart', function(error, stdout, stderr) {
+    spawn.exec('sudo /usr/sbin/service homebook restart', function(error, stdout, stderr) {
       console.log('stdout: ' + stdout);
       console.log('stderr: ' + stderr);
       if (error !== null) {
