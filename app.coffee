@@ -12,6 +12,7 @@ user = require('./routes/user')
 bill = require('./routes/bill')
 product = require('./routes/product')
 shop = require('./routes/shop')
+admin = require('./routes/admin')
 
 app = express()
 # view engine setup
@@ -39,6 +40,7 @@ app.use (req, res, next) ->
   next()
   return
 app.use '/', routes
+app.use '/admin', admin
 app.use '/list', list
 app.use '/user', user
 app.use '/bill', bill
