@@ -35,6 +35,7 @@ app.use passport.initialize()
 app.use passport.session()
 # Для проверки авторизации в темплейтах
 app.use (req, res, next) ->
+  res.locals.app_version = '0.0.2'
   res.locals.user = req.user
   #res.locals.login = req.isAuthenticated();
   next()
