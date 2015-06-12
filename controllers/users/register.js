@@ -8,10 +8,16 @@
   module.exports = function(req, res, next) {
     users_db.users.get(req.body.email, function(err, doc) {
       if (err && err.error === 'not_found') {
-        return users_db.users.save(req.body.email, {
+        users_db.users.save(req.body.email, {
           email: req.body.email,
-          password: req.body.password
+          name: req.body.email,
+          password: req.body.password,
+          roles: ['ROLE_USER'],
+          type: 'user'
         }, function(err, res) {});
+        return users_db.users.addUser(req.body.email, req.body.password, ['ROLE_USER'], function(err, res) {
+          console.log(res);
+        });
       }
     });
     next();

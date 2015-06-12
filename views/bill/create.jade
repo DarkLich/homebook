@@ -44,14 +44,18 @@ block content
             //input.form-control.product-title.typeahead(name="title" type="text", data-provide="typeahead", autocomplete="off")
             input.product-id(name='product_id', type='hidden')
           .col-md-2
-            input.form-control(name='price', type='number')
+            input.form-control.product-price(name='price', type='text')
           .col-md-1
             select.form-control(name='measure')
-              option(value='kg') кг.
               option(value='pi') шт.
+              option(value='kg') кг.
           .col-md-2
-            input.form-control(name='count', type='text')
+            input.form-control.product-count(name='count', type='text')
           .col-md-2
-            input.form-control(name='sum', type='text')
+            input.form-control.product-sum(name='sum', type='text')
 
-      button.col-md-offset-1.btn.btn-default(type='submit') Submit
+      .form-group
+        .col-md-2.col-md-offset-9
+          input.form-control.total-price(type='text' readonly=true)
+
+      button.col-md-1.col-md-offset-1.btn.btn-success(type='Submit') Отправить

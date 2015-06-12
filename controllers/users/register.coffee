@@ -8,9 +8,17 @@ module.exports = (req, res, next) ->
     if err and err.error is 'not_found' #если такой юзер еще не зарегистрирован
       users_db.users.save req.body.email, {
         email: req.body.email
+        name: req.body.email
         password: req.body.password
+        roles: ['ROLE_USER']
+        type: 'user'
       }, (err, res) ->
         # Handle response
+        return
+
+      # дополнительно создаем юзера для аутентификации
+      users_db.users.addUser req.body.email, req.body.password, [ 'ROLE_USER' ], (err, res) ->
+        console.log res
         return
   )
   next()

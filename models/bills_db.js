@@ -4,22 +4,7 @@
 
   couch = require('./couch');
 
-  bills_db = couch.connection.database('h_bills');
-
-  bills_db.exists(function(err, exists) {
-    if (err) {
-      return console.log('error', err);
-    } else if (exists) {
-      return console.log('the force is with you.');
-    } else {
-      console.log('database does not exists.');
-      return bills_db.create(function(err) {
-        if (err) {
-          return console.log('не удалось создать базу h_bills');
-        }
-      });
-    }
-  });
+  bills_db = couch.getDb('h_bills', function() {});
 
   module.exports.bills = bills_db;
 

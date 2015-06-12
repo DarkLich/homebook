@@ -34,15 +34,14 @@ $ ->
 
   $('#create_bill').submit (e)->
     form = this
-    console.log form.title
 #    e.preventDefault()
 
-    $('.product-params').each(->
-      product = {}
-      product.title = $('[name="title"]', this)
-      console.log product
-#      console.log this
-    )
+#    $('.product-params').each(->
+#      product = {}
+#      product.title = $('[name="title"]', this)
+#      console.log product
+##      console.log this
+#    )
 
     console.log $(form).serialize()
     console.log $(form).serializeArray()
@@ -56,6 +55,38 @@ $ ->
 #    return false
   setPurchaseTypeahead()
   setShopTypeahead()
+
+  replaceKoma = (val)->
+    return val.replace(/,/ , '.')
+
+  convertToNumber = (num)->
+    result = parseFloat(num)
+    console.log result
+    console.log isNaN(result)
+    if isNaN(result)
+      result = 0
+    return result
+
+  calculateTotal = ()->
+    total = 0
+    $('.product-sum').each (k, el)->
+      console.log 'el='
+      console.log el
+      total+= convertToNumber($(el).val())
+    $('.total-price').val(math.round(total,2))
+
+  $(document).on 'keyup', '.product-price, .product-count', (e)->
+    $(e.currentTarget).val(replaceKoma($(e.currentTarget).val()))
+    parent = $(e.currentTarget).closest('.product-params')
+    convertToNumber(parent.find('.product-price').val())
+
+    console.log parent
+    price = convertToNumber( parent.find('.product-price').val() )
+    count = convertToNumber( parent.find('.product-count').val() )
+    sum_field = parent.find('.product-sum').val(math.round(price*count,2))
+
+    calculateTotal()
+    return
 
   $(document).on 'change', '.shop-title', (e)->
     input = $(e.currentTarget)

@@ -37,20 +37,13 @@
   };
 
   $(function() {
-    var current_date;
+    var calculateTotal, convertToNumber, current_date, replaceKoma;
     addPurchaseLine();
     current_date = new Date();
     $('#bill_date').val(current_date.toJSON().slice(0, 10));
     $('#create_bill').submit(function(e) {
       var form;
       form = this;
-      console.log(form.title);
-      $('.product-params').each(function() {
-        var product;
-        product = {};
-        product.title = $('[name="title"]', this);
-        return console.log(product);
-      });
       console.log($(form).serialize());
       return console.log($(form).serializeArray());
     });
@@ -61,6 +54,40 @@
     });
     setPurchaseTypeahead();
     setShopTypeahead();
+    replaceKoma = function(val) {
+      return val.replace(/,/, '.');
+    };
+    convertToNumber = function(num) {
+      var result;
+      result = parseFloat(num);
+      console.log(result);
+      console.log(isNaN(result));
+      if (isNaN(result)) {
+        result = 0;
+      }
+      return result;
+    };
+    calculateTotal = function() {
+      var total;
+      total = 0;
+      $('.product-sum').each(function(k, el) {
+        console.log('el=');
+        console.log(el);
+        return total += convertToNumber($(el).val());
+      });
+      return $('.total-price').val(math.round(total, 2));
+    };
+    $(document).on('keyup', '.product-price, .product-count', function(e) {
+      var count, parent, price, sum_field;
+      $(e.currentTarget).val(replaceKoma($(e.currentTarget).val()));
+      parent = $(e.currentTarget).closest('.product-params');
+      convertToNumber(parent.find('.product-price').val());
+      console.log(parent);
+      price = convertToNumber(parent.find('.product-price').val());
+      count = convertToNumber(parent.find('.product-count').val());
+      sum_field = parent.find('.product-sum').val(math.round(price * count, 2));
+      calculateTotal();
+    });
     $(document).on('change', '.shop-title', function(e) {
       var current, input, parent;
       input = $(e.currentTarget);
