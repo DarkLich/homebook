@@ -1,6 +1,7 @@
 express = require('express')
 router = express.Router()
 users = require('../controllers/users')
+winston = require('winston')
 
 requireAuth = (req, res, next) ->
   # check if the user is logged in
@@ -21,6 +22,8 @@ router.post '/login', users.login, (req, res, next) ->
   res.render 'index', title: 'Express'
   return
 router.get '/login', (req, res, next) ->
+  console.log('ffff')
+  winston.log('info', 'Test Log Message', { anything: 'This is metadata' })
   res.render 'user/login', title: 'Express'
   return
 router.get '/register', (req, res, next) ->

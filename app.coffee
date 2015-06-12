@@ -1,7 +1,7 @@
 express = require('express')
 path = require('path')
 favicon = require('serve-favicon')
-logger = require('morgan')
+morgan = require('morgan')
 cookieParser = require('cookie-parser')
 bodyParser = require('body-parser')
 session = require('express-session')
@@ -13,6 +13,7 @@ bill = require('./routes/bill')
 product = require('./routes/product')
 shop = require('./routes/shop')
 admin = require('./routes/admin')
+fs = require('fs')
 
 app = express()
 # view engine setup
@@ -20,7 +21,11 @@ app.set 'views', path.join(__dirname, 'views')
 app.set 'view engine', 'jade'
 # uncomment after placing your favicon in /public
 #app.use(favicon(__dirname + '/public/favicon.ico'));
-app.use logger('dev')
+
+#app.use morgan('dev')
+accessLogStream = fs.createWriteStream(__dirname + '/logs/access.log', {flags: 'a'})
+app.use(morgan('combined', {stream: accessLogStream}))
+
 app.use bodyParser.json()
 app.use bodyParser.urlencoded(extended: false)
 app.use cookieParser()
