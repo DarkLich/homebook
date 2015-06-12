@@ -40,6 +40,10 @@
 
   app.set('view engine', 'jade');
 
+  if (!fs.existsSync(__dirname + '/logs')) {
+    fs.mkdirSync(__dirname + '/logs');
+  }
+
   accessLogStream = fs.createWriteStream(__dirname + '/logs/access.log', {
     flags: 'a'
   });

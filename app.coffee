@@ -23,6 +23,8 @@ app.set 'view engine', 'jade'
 #app.use(favicon(__dirname + '/public/favicon.ico'));
 
 #app.use morgan('dev')
+if (!fs.existsSync(__dirname + '/logs'))
+  fs.mkdirSync(__dirname + '/logs')
 accessLogStream = fs.createWriteStream(__dirname + '/logs/access.log', {flags: 'a'})
 app.use(morgan('combined', {stream: accessLogStream}))
 
