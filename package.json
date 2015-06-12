@@ -24,6 +24,7 @@
     "passport-local": "^1.0.0",
     "require-tree": "^1.0.1",
     "serve-favicon": "~2.2.1",
-    "unit.js": "^2.0.0"
+    "unit.js": "^2.0.0",
+    "winston": "^1.0.0"
   }
 }
