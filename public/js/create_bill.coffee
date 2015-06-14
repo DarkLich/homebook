@@ -50,7 +50,10 @@ $ ->
     if $('.product-title').last().val() isnt ''
       addPurchaseLine()
 
-
+  # отправка формы по ctrl + enter
+  $(document).on 'keyup', (e)->
+    if e.which is 13 and e.ctrlKey is true
+      $('#create_bill').submit()
 
 #    return false
   setPurchaseTypeahead()
@@ -61,31 +64,25 @@ $ ->
 
   convertToNumber = (num)->
     result = parseFloat(num)
-    console.log result
-    console.log isNaN(result)
     if isNaN(result)
       result = 0
     return result
 
-  calculateTotal = ()->
+  calculatePrice = ()->
     total = 0
     $('.product-sum').each (k, el)->
-      console.log 'el='
-      console.log el
       total+= convertToNumber($(el).val())
     $('.total-price').val(math.round(total,2))
 
-  $(document).on 'keyup', '.product-price, .product-count', (e)->
+  $(document).on 'keyup', '.product-sum, .product-count', (e)->
     $(e.currentTarget).val(replaceKoma($(e.currentTarget).val()))
     parent = $(e.currentTarget).closest('.product-params')
-    convertToNumber(parent.find('.product-price').val())
 
-    console.log parent
-    price = convertToNumber( parent.find('.product-price').val() )
+    sum = convertToNumber( parent.find('.product-sum').val() )
     count = convertToNumber( parent.find('.product-count').val() )
-    sum_field = parent.find('.product-sum').val(math.round(price*count,2))
+    price_field = parent.find('.product-price').val(math.round(sum/count,3))
 
-    calculateTotal()
+    calculatePrice()
     return
 
   $(document).on 'change', '.shop-title', (e)->

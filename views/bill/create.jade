@@ -26,13 +26,13 @@ block content
         .col-md-3.col-md-offset-1
           label Наименование
         .col-md-2
-          label Цена
+          label Стоимость
         .col-md-1
           label Мера
         .col-md-2
           label Количество
         .col-md-2
-          label Сумма
+          label Цена
       fieldset.products
         .form-group.product-params.hidden-group
           .col-md-3.col-md-offset-1
@@ -44,18 +44,18 @@ block content
             //input.form-control.product-title.typeahead(name="title" type="text", data-provide="typeahead", autocomplete="off")
             input.product-id(name='product_id', type='hidden')
           .col-md-2
-            input.form-control.product-price(name='price', type='text')
+            input.form-control.product-sum(name='sum', type='text')
           .col-md-1
             select.form-control(name='measure')
               option(value='pi') шт.
               option(value='kg') кг.
           .col-md-2
-            input.form-control.product-count(name='count', type='text')
+            input.form-control.product-count(name='count', type='text', value='1')
           .col-md-2
-            input.form-control.product-sum(name='sum', type='text')
+            input.form-control.product-price(name='price', type='text')
 
       .form-group
-        .col-md-2.col-md-offset-9
+        .col-md-2.col-md-offset-7
           input.form-control.total-price(type='text' readonly=true)
 
       button.col-md-1.col-md-offset-1.btn.btn-success(type='Submit') Отправить

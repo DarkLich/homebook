@@ -37,7 +37,7 @@
   };
 
   $(function() {
-    var calculateTotal, convertToNumber, current_date, replaceKoma;
+    var calculatePrice, convertToNumber, current_date, replaceKoma;
     addPurchaseLine();
     current_date = new Date();
     $('#bill_date').val(current_date.toJSON().slice(0, 10));
@@ -52,6 +52,11 @@
         return addPurchaseLine();
       }
     });
+    $(document).on('keyup', function(e) {
+      if (e.which === 13 && e.ctrlKey === true) {
+        return $('#create_bill').submit();
+      }
+    });
     setPurchaseTypeahead();
     setShopTypeahead();
     replaceKoma = function(val) {
@@ -60,33 +65,27 @@
     convertToNumber = function(num) {
       var result;
       result = parseFloat(num);
-      console.log(result);
-      console.log(isNaN(result));
       if (isNaN(result)) {
         result = 0;
       }
       return result;
     };
-    calculateTotal = function() {
+    calculatePrice = function() {
       var total;
       total = 0;
       $('.product-sum').each(function(k, el) {
-        console.log('el=');
-        console.log(el);
         return total += convertToNumber($(el).val());
       });
       return $('.total-price').val(math.round(total, 2));
     };
-    $(document).on('keyup', '.product-price, .product-count', function(e) {
-      var count, parent, price, sum_field;
+    $(document).on('keyup', '.product-sum, .product-count', function(e) {
+      var count, parent, price_field, sum;
       $(e.currentTarget).val(replaceKoma($(e.currentTarget).val()));
       parent = $(e.currentTarget).closest('.product-params');
-      convertToNumber(parent.find('.product-price').val());
-      console.log(parent);
-      price = convertToNumber(parent.find('.product-price').val());
+      sum = convertToNumber(parent.find('.product-sum').val());
       count = convertToNumber(parent.find('.product-count').val());
-      sum_field = parent.find('.product-sum').val(math.round(price * count, 2));
-      calculateTotal();
+      price_field = parent.find('.product-price').val(math.round(sum / count, 3));
+      calculatePrice();
     });
     $(document).on('change', '.shop-title', function(e) {
       var current, input, parent;

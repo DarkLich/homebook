@@ -14,7 +14,7 @@
   shops_db = require('../../models/shops_db');
 
   module.exports = function(req, res, next) {
-    var bill, body;
+    var bill, body, err;
     if (req.user) {
       body = req.body;
       bill = {
@@ -27,7 +27,7 @@
         purchases: []
       };
       if (Array.isArray(body.title) && body.title.length > 0) {
-        if (bill.shop_title && !bill.shop_id) {
+        if (bill.shop_title) {
           saveShop(bill, function() {
             var absent_products, i, item, j, ref;
             absent_products = 0;
@@ -56,6 +56,10 @@
               return processSaving(bill, absent_products);
             }
           });
+        } else {
+          err = new Error('No shop provided');
+          err.status = 500;
+          next(err);
         }
       }
     }
@@ -63,12 +67,20 @@
   };
 
   saveShop = function(bill, cb) {
-    shops_db.shops.save({
-      title: bill.shop_title
-    }, function(err, res) {
-      bill.shop_id = res.id;
-      return cb();
-    });
+    if (bill.shop_title) {
+      if (!bill.shop_id) {
+        shops_db.shops.save({
+          title: bill.shop_title
+        }, function(err, res) {
+          bill.shop_id = res.id;
+          return cb();
+        });
+      } else {
+        cb();
+      }
+    } else {
+
+    }
   };
 
   processSaving = function(bill, absent_products) {

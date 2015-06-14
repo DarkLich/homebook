@@ -16,9 +16,6 @@ passport.use new LocalStrategy({
 #    console.log email
 #    console.log password
     users_db.users.get email, (err, doc) ->
-      console.log '!doc!'
-
-      console.log doc
       if err
         done(err)
       else if doc
@@ -32,7 +29,6 @@ passport.use new LocalStrategy({
 )
 
 passport.serializeUser (user, done) ->
-  console.log 'serializeUSER!!!'
   done null, user.id
   return
 passport.deserializeUser (id, done) ->

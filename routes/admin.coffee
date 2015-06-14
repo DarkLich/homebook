@@ -1,32 +1,23 @@
 express = require('express')
 router = express.Router()
-bills = require('../controllers/bills')
+admin = require('../controllers/admin')
 
-spawn = require('child_process')
-_ = require('lodash')
+## Доступ к админ-действиям только для залогиненых юзеров
+router.use '/*', (req, res, next) ->
+  if not req.user
+    res.redirect '/user/login'
+  else
+    next()
+  return
 
-## Доступ к чекам только для залогиненых юзеров
-#router.use '/*', (req, res, next) ->
-#  if not req.user
-#    res.redirect '/user/login'
-#  else
-#    next()
-#  return
-
-router.get '/restart', (req, res, next) ->
+router.get '/restart', admin.restart, (req, res, next) ->
   console.log 'restart'
-#  res.render 'bill/create'
-  #deploySh = spawn('sh', [ 'deploy.sh' ], {
-  #  cwd: process.env.HOME + '/myProject',
-  #  env:_.extend(process.env, { PATH: process.env.PATH + ':/usr/local/bin' })
-  #})
+  res.redirect '/'
+  return
 
-  spawn.exec 'sudo /usr/sbin/service homebook restart', (error, stdout, stderr) ->
-    console.log 'stdout: ' + stdout
-    console.log 'stderr: ' + stderr
-    if error != null
-      console.log 'exec error: ' + error
-    return
+router.get '/replicate/to', admin.replicateTo, (req, res, next) ->
+  console.log 'replicate'
+  res.redirect '/'
   return
 
 module.exports = router

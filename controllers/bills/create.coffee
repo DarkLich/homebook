@@ -18,7 +18,7 @@ module.exports = (req, res, next) ->
       creation_date: new Date()
       purchases: []
     if Array.isArray(body.title) and body.title.length > 0
-      if bill.shop_title and !bill.shop_id
+      if bill.shop_title
         saveShop bill, ()->
           absent_products = 0
           for i in [0..body.title.length]
@@ -41,14 +41,23 @@ module.exports = (req, res, next) ->
                 absent_products++
           if bill.purchases.length > 0
             processSaving(bill, absent_products)
-
+      else
+        err = new Error('No shop provided')
+        err.status = 500
+        next err
   next()
   return
 
 saveShop = (bill, cb)->
-  shops_db.shops.save {title: bill.shop_title}, (err, res)->
-    bill.shop_id = res.id
-    cb()
+  if bill.shop_title
+    if !bill.shop_id
+      shops_db.shops.save {title: bill.shop_title}, (err, res)->
+        bill.shop_id = res.id
+        cb()
+    else
+      cb()
+  else
+
   return
 
 processSaving = (bill, absent_products)->
@@ -78,26 +87,3 @@ saveBill = (bill)->
       return
     return
   return
-
-
-#savePurchase = (purchase, count, bill)->
-#  saveToDb = ()->
-#    purchases_db.purchases.save purchase, (err, res) ->
-#      console.log res
-#      bill.purchases.push res.id
-#
-#      if bill.purchases.length is count   # and count > 0
-#        saveBill(bill)
-#      # Handle response
-#      return
-#
-#  console.log purchase
-#  if purchase.title
-#    if !purchase.product_id
-#      products_db.products.save {title: purchase.title}, (err, res) ->
-#        purchase.id = res.id
-#        saveToDb()
-#    else
-#      saveToDb()
-#
-#  return

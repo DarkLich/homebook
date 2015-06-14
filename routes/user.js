@@ -22,13 +22,12 @@
   adminHandler = function(req, res, next) {};
 
   router.post('/login', users.login, function(req, res, next) {
-    res.render('index', {
+    res.redirect('/', {
       title: 'Express'
     });
   });
 
   router.get('/login', function(req, res, next) {
-    console.log('ffff');
     winston.log('info', 'Test Log Message', {
       anything: 'This is metadata'
     });
@@ -44,7 +43,7 @@
   });
 
   router.post('/register', users.register, function(req, res, next) {
-    res.render('index', {
+    res.redirect('/', {
       title: 'Express'
     });
   });

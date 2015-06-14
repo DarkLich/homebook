@@ -19,8 +19,6 @@
     passwordField: 'password'
   }, function(email, password, done) {
     users_db.users.get(email, function(err, doc) {
-      console.log('!doc!');
-      console.log(doc);
       if (err) {
         return done(err);
       } else if (doc) {
@@ -40,7 +38,6 @@
   }));
 
   passport.serializeUser(function(user, done) {
-    console.log('serializeUSER!!!');
     done(null, user.id);
   });
 

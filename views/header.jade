@@ -16,6 +16,11 @@
 
       p.navbar-text.navbar-left= 'v.' + app_version
       ul.nav.navbar-nav.navbar-right
+        if isAdmin
+          li
+            a(href='/admin/replicate/to') ReplicateTo
+          li
+            a(href='/admin/replicate/from') ReplicateFrom
         if user
           li
             p.nav.navbar-text !{user.email}

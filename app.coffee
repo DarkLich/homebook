@@ -45,6 +45,8 @@ app.use (req, res, next) ->
   res.locals.app_version = '0.0.4'
   res.locals.user = req.user
   #res.locals.login = req.isAuthenticated();
+  if req.user
+    res.locals.isAdmin = req.user.email is 'dark-lich@inbox.ru'
   next()
   return
 app.use '/', routes
