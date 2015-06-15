@@ -75,6 +75,8 @@ $ ->
     $('.total-price').val(math.round(total,2))
 
   $(document).on 'keyup', '.product-sum, .product-count', (e)->
+    if e.which is 9
+      return
     $(e.currentTarget).val(replaceKoma($(e.currentTarget).val()))
     parent = $(e.currentTarget).closest('.product-params')
 

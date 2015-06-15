@@ -33,6 +33,15 @@ app.use bodyParser.urlencoded(extended: false)
 app.use cookieParser()
 app.use express.static(path.join(__dirname, 'public'))
 #app.use(bodyParser);
+
+# возможно пригодится если возникнет проблема с подключением socket.io
+#app.use (req, res, next) ->
+#  res.setHeader 'Access-Control-Allow-Origin', 'http://' + req.headers.host + ':3001'
+#  res.setHeader 'Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE'
+#  res.setHeader 'Access-Control-Allow-Headers', 'X-Requested-With,content-type'
+#  next()
+#  return
+
 app.use session(
   secret: 'SECRET'
   resave: true

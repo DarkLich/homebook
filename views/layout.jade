@@ -5,11 +5,17 @@ html
 
     link(rel='stylesheet', href='/libs/bootstrap/css/bootstrap.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/libs/messenger-1.4.1/build/css/messenger.css')
+    link(rel='stylesheet', href='/libs/messenger-1.4.1/build/css/messenger-theme-future.css')
 
+    script(src='/libs/socket.io.js')
     script(src='/libs/jquery-2.1.4.js')
     script(src='/libs/bootstrap/js/bootstrap.js')
     script(src='/libs/typeahead/bootstrap3-typeahead.js')
     script(src='/libs/math.js')
+    script(src='/libs/messenger-1.4.1/build/js/messenger.min.js')
+    script(src='/libs/messenger-1.4.1/build/js/messenger-theme-future.js')
+    script(src='/js/main.js')
     block scripts
   body
     include ./header.jade

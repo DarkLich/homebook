@@ -5,6 +5,7 @@ bills_db = require('../../models/bills_db')
 purchases_db = require('../../models/purchases_db')
 products_db = require('../../models/products_db')
 shops_db = require('../../models/shops_db')
+io = require('../io')
 
 module.exports = (req, res, next) ->
   if req.user
@@ -83,7 +84,7 @@ saveBill = (bill)->
       bill.purchases.push v.id
 
     bills_db.bills.save bill, (err, res) ->
-      # Handle response
+      io.show('чек из ' + bill.shop_title + ' от ' + bill.date + ' успешно создан', 'success')
       return
     return
   return

@@ -80,6 +80,9 @@
     };
     $(document).on('keyup', '.product-sum, .product-count', function(e) {
       var count, parent, price_field, sum;
+      if (e.which === 9) {
+        return;
+      }
       $(e.currentTarget).val(replaceKoma($(e.currentTarget).val()));
       parent = $(e.currentTarget).closest('.product-params');
       sum = convertToNumber(parent.find('.product-sum').val());
