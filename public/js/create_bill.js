@@ -98,18 +98,12 @@
       if (current) {
         if (current.name.toLowerCase() === input.val().toLowerCase()) {
           $('.shop-id').val(current.id);
-          parent.find('.add-shop').attr('disabled', true);
-          parent.find('.add-shop .glyphicon').removeClass('red-text');
-          input.removeClass('warning-field');
+          globals.togglePlusButton(parent, 'disable');
         } else {
-          parent.find('.add-shop').removeAttr('disabled');
-          parent.find('.add-shop .glyphicon').addClass('red-text');
-          input.addClass('warning-field');
+          globals.togglePlusButton(parent, 'enable');
         }
       } else {
-        parent.find('.add-shop').removeAttr('disabled');
-        parent.find('.add-shop .glyphicon').addClass('red-text');
-        input.addClass('warning-field');
+        globals.togglePlusButton(parent, 'enable');
       }
     });
     return $(document).on('change', '.product-title', function(e) {
@@ -120,18 +114,12 @@
       if (current) {
         if (current.name.toLowerCase() === input.val().toLowerCase()) {
           parent.find('.product-id').val(current.id);
-          parent.find('.add-purchase').attr('disabled', true);
-          parent.find('.add-purchase .glyphicon').removeClass('red-text');
-          input.removeClass('warning-field');
+          globals.togglePlusButton(parent, 'disable');
         } else {
-          parent.find('.add-purchase').removeAttr('disabled');
-          parent.find('.add-purchase .glyphicon').addClass('red-text');
-          input.addClass('warning-field');
+          globals.togglePlusButton(parent, 'enable');
         }
       } else {
-        parent.find('.add-purchase').removeAttr('disabled');
-        parent.find('.add-purchase .glyphicon').addClass('red-text');
-        input.addClass('warning-field');
+        globals.togglePlusButton(parent, 'enable');
       }
     });
   });

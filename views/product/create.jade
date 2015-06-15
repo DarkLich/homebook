@@ -1,18 +1,60 @@
 extends ../layout
 
 block scripts
-  //script(src='/js/create_bill.js')
+  script(src='/js/create_product.js')
 
 block content
   h4 Создать продукт
   if error
     h4(style="color: red")= error
   .container-fluid
-    form#create_bill.form-horizontal(action='/product/create' method='post')
+    form#create_product.form-horizontal(action='/product/create' method='post')
       .form-group
         label.col-md-2.col-md-offset-1.control-label Наименование
-        .col-md-2
+        .col-md-3
           input.form-control(name='title', type='text')
+      .form-group
+        label.col-md-2.col-md-offset-1.control-label Класс
+        .col-md-3
+          select.form-control(name='kind')
+            option(value='food') Еда
+            option(value='other') Другое
+      .form-group
+        label.col-md-2.col-md-offset-1.control-label Категория
+        .col-md-3
+          .input-group
+            input.form-control.product-category(name="category" type="text", data-provide="typeahead", autocomplete="off")
+            span.input-group-btn
+              button.btn.btn-default.add-category.add-button(type="button", disabled=true, data-toggle='modal', data-target='#new_category')
+                span.glyphicon.glyphicon-plus
+        input.category-id(name='category_id', type='hidden')
 
 
-      button.col-md-offset-1.btn.btn-default(type='submit') Submit
+      button.col-md-offset-1.btn.btn-success(type='submit') Отправить
+
+
+  // Modal
+  #new_category.modal.fade(tabindex='-1', role='dialog', aria-labelledby='new_category_label', aria-hidden='true')
+    .modal-dialog
+      .modal-content
+        .modal-header
+          button.close(type='button', data-dismiss='modal', aria-label='Close')
+            span(aria-hidden='true') ×
+          h4#new_category_label.modal-title Добавить категорию
+        .modal-body
+          .container-fluid
+            form#create_category.form-horizontal(action='/category/create' method='post')
+              .form-group
+                label.col-md-4.col-md-offset-1.control-label Класс
+                .col-md-6
+                  select.form-control(name='kind')
+                    option(value='food') Еда
+                    option(value='other') Другое
+              .form-group
+                label.col-md-4.col-md-offset-1.control-label Наименование
+                .col-md-6
+                  input.form-control.category-title(name='title', type='text', readonly=true)
+              button.col-md-offset-1.btn.btn-success(type='submit') Отправить
+        //.modal-footer
+        //  button.btn.btn-default(type='button', data-dismiss='modal') Close
+        //  button.btn.btn-primary(type='button') Save changes

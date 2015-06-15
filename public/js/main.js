@@ -14,6 +14,13 @@
         type: "success"
       });
     });
+    socket.on('error', function(data) {
+      console.log(data);
+      Messenger().post({
+        message: data.message,
+        type: "error"
+      });
+    });
   });
 
 }).call(this);

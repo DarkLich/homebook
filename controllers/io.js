@@ -14,11 +14,13 @@
     });
   };
 
-  module.exports.show = function(text, type) {
+  module.exports.show = function(text, type, data) {
+    data = data || null;
     type = !type ? 'success' : type;
     setTimeout(function() {
       return io.sockets.emit(type, {
-        message: text
+        message: text,
+        data: data
       });
     }, 3000);
   };

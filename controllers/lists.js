@@ -4,4 +4,6 @@
 
   module.exports.shops = require('./lists/shops');
 
+  module.exports.categories = require('./lists/categories');
+
 }).call(this);

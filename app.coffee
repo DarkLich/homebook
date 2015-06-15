@@ -13,6 +13,7 @@ bill = require('./routes/bill')
 product = require('./routes/product')
 shop = require('./routes/shop')
 admin = require('./routes/admin')
+category = require('./routes/category')
 fs = require('fs')
 
 app = express()
@@ -65,6 +66,7 @@ app.use '/user', user
 app.use '/bill', bill
 app.use '/product', product
 app.use '/shop', shop
+app.use '/category', category
 # catch 404 and forward to error handler
 app.use (req, res, next) ->
   err = new Error('Not Found')

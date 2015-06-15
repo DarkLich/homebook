@@ -12,6 +12,8 @@
 
   router.get('/shops', lists.shops, function(req, res, next) {});
 
+  router.get('/categories', lists.categories, function(req, res, next) {});
+
   module.exports = router;
 
 }).call(this);

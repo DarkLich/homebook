@@ -1,9 +1,9 @@
 'use strict'
 _ = require('lodash')
-shops_db = require('../../models/shops_db')
+categories_db = require('../../models/categories_db')
 
 module.exports = (req, res, next)->
-  shops_db.shops.view 'all/all', {include_docs: true}, (err, docs)->
+  categories_db.categories.view 'all/all', {include_docs: true}, (err, docs)->
     items = []
     _.each docs, (val)->
       items.push

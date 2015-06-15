@@ -1,0 +1,22 @@
+extends ../layout
+
+block scripts
+  script(src='/js/create_category.js')
+
+block content
+  h4 Создать категорию
+  if error
+    h4(style="color: red")= error
+  .container-fluid
+    form#create_category.form-horizontal(action='/category/create' method='post')
+      .form-group
+        label.col-md-2.col-md-offset-1.control-label Класс
+        .col-md-2
+          select.form-control(name='kind')
+            option(value='food') Еда
+            option(value='other') Другое
+      .form-group
+        label.col-md-2.col-md-offset-1.control-label Наименование
+        .col-md-2
+          input.form-control.category-title(name='title', type='text', data-provide="typeahead", autocomplete="off")
+      button.col-md-offset-1.btn.btn-success(type='submit') Отправить

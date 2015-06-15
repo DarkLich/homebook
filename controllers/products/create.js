@@ -6,14 +6,25 @@
   products_db = require('../../models/products_db');
 
   module.exports = function(req, res, next) {
-    var product;
-    console.log('CREATION');
-    console.log(req.body);
+    var err, product;
+    err = null;
     product = req.body;
-    products_db.products.save(product, function(err, res) {
-      console.log(res);
-    });
-    next();
+    if (req.body.title) {
+      if (req.body.category && !req.body.category_id) {
+        err = next(new Error('category_id not provided'));
+      } else {
+        products_db.products.save(product, function(err, res) {
+          console.log(res);
+        });
+      }
+    } else {
+      err = next(new Error('title not provided'));
+    }
+    if (err) {
+      next(err);
+    } else {
+      next();
+    }
   };
 
 }).call(this);

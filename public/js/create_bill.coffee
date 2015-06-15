@@ -97,20 +97,14 @@ $ ->
       # Some item from your model is active!
       if current.name.toLowerCase() is input.val().toLowerCase()
         $('.shop-id').val(current.id)
-        parent.find('.add-shop').attr('disabled', true)
-        parent.find('.add-shop .glyphicon').removeClass('red-text')
-        input.removeClass('warning-field')
+        globals.togglePlusButton(parent, 'disable')
         # This means the exact match is found. Use toLowerCase() if you want case insensitive match.
       else
-        parent.find('.add-shop').removeAttr('disabled')
-        parent.find('.add-shop .glyphicon').addClass('red-text')
-        input.addClass('warning-field')
+        globals.togglePlusButton(parent, 'enable')
       # This means it is only a partial match, you can either add a new item
       # or take the active if you don't want new items
     else
-      parent.find('.add-shop').removeAttr('disabled')
-      parent.find('.add-shop .glyphicon').addClass('red-text')
-      input.addClass('warning-field')
+      globals.togglePlusButton(parent, 'enable')
     # Nothing is active so it is a new value (or maybe empty value)
     return
 
@@ -125,19 +119,13 @@ $ ->
       # Some item from your model is active!
       if current.name.toLowerCase() is input.val().toLowerCase()
         parent.find('.product-id').val(current.id)
-        parent.find('.add-purchase').attr('disabled', true)
-        parent.find('.add-purchase .glyphicon').removeClass('red-text')
-        input.removeClass('warning-field')
+        globals.togglePlusButton(parent, 'disable')
         # This means the exact match is found. Use toLowerCase() if you want case insensitive match.
       else
-        parent.find('.add-purchase').removeAttr('disabled')
-        parent.find('.add-purchase .glyphicon').addClass('red-text')
-        input.addClass('warning-field')
+        globals.togglePlusButton(parent, 'enable')
         # This means it is only a partial match, you can either add a new item
         # or take the active if you don't want new items
     else
-      parent.find('.add-purchase').removeAttr('disabled')
-      parent.find('.add-purchase .glyphicon').addClass('red-text')
-      input.addClass('warning-field')
+      globals.togglePlusButton(parent, 'enable')
       # Nothing is active so it is a new value (or maybe empty value)
     return

@@ -67,7 +67,7 @@
     var remote_admin_password, remote_admin_username, replicateBases;
     remote_admin_username = adminUsername;
     remote_admin_password = adminPassword;
-    replicateBases = ['h_products', 'h_shops', 'h_purchases', 'h_bills'];
+    replicateBases = ['h_products', 'h_shops', 'h_purchases', 'h_bills', 'h_categories'];
     console.log('-----------start_replicate_to-----------');
     _.each(replicateBases, function(base) {
       return con.replicate({
@@ -85,7 +85,7 @@
     var remote_admin_password, remote_admin_username, replicateBases;
     remote_admin_username = adminUsername;
     remote_admin_password = adminPassword;
-    replicateBases = ['h_products', 'h_shops', 'h_purchases', 'h_bills'];
+    replicateBases = ['h_products', 'h_shops', 'h_purchases', 'h_bills', 'h_categories'];
     console.log('-----------start_replicate_from-----------');
     _.each(replicateBases, function(base) {
       return con.replicate({

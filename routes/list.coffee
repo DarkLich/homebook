@@ -12,8 +12,9 @@ router.get '/shops', lists.shops, (req, res, next) ->
 #  res.render 'bill/create'
   return
 #
-#router.post '/create', bills.create, (req, res, next) ->
+router.get '/categories', lists.categories, (req, res, next) ->
+#  console.log 'get'
 #  res.render 'bill/create'
-#  return
+  return
 
 module.exports = router

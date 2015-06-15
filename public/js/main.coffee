@@ -14,7 +14,11 @@ $ ->
       message: data.message
       type: "success"
     return
+  socket.on 'error', (data)->
+    console.log data
+    Messenger().post
+      message: data.message
+      type: "error"
+    return
 
   return
-
-

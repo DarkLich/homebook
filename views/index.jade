@@ -1,21 +1,15 @@
 extends layout
 
 block content
-  //h1= title
-  //p Привет,
-  //  if user
-  //    | !{user.email}
-  //  else
-  //    | неизвестный
-  //  a(href='http://localhost:3000/user/login') login
-  //p.col-md-2
-  //  a(href='http://localhost:3000/user/register') register
-  //p.col-md-2
-  //  a(href='http://localhost:3000/user/logout') logout
-
   if user
+    h3 Привет,
+      | !{user.email}
     p
-      a(href='/bill/create') Заполняшка
+      a.btn.btn-success(href='/bill/create', role="button") Создание чека
+    p
+      a.btn.btn-success(href='/product/create', role="button") Добавить продукт
+    p
+      a.btn.btn-success(href='/shop/create', role="button") Добавить магазин
   else
-    p
-      | you are NOT!
+    h3.col-md-6.col-md-offset-3.text-center
+      | Необходимо залогиниться!

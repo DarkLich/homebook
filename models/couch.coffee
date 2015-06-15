@@ -57,7 +57,7 @@ replicateTo = ()->
   remote_admin_username = adminUsername
   remote_admin_password = adminPassword
 
-  replicateBases = ['h_products','h_shops','h_purchases','h_bills']
+  replicateBases = ['h_products','h_shops','h_purchases','h_bills','h_categories']
 
   console.log '-----------start_replicate_to-----------'
   _.each replicateBases, (base)->
@@ -71,7 +71,7 @@ replicateFrom = ()->
   remote_admin_username = adminUsername
   remote_admin_password = adminPassword
 
-  replicateBases = ['h_products','h_shops','h_purchases','h_bills']
+  replicateBases = ['h_products','h_shops','h_purchases','h_bills','h_categories']
 
   console.log '-----------start_replicate_from-----------'
   _.each replicateBases, (base)->

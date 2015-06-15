@@ -14,10 +14,11 @@ module.exports.init = (server)->
     return
   return
 
-module.exports.show = (text, type) ->
+module.exports.show = (text, type, data) ->
+  data = data || null
   type = if !type then 'success' else type
   setTimeout(()->
-    io.sockets.emit(type, { message: text })
+    io.sockets.emit(type, { message: text, data: data })
   , 3000)
   return
 

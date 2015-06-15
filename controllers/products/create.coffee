@@ -3,16 +3,22 @@
 products_db = require('../../models/products_db')
 
 module.exports = (req, res, next) ->
-  console.log 'CREATION'
-  console.log(req.body)
-
+  err = null
   product = req.body
+  if req.body.title
+    if req.body.category and !req.body.category_id
+      err = next(new Error('category_id not provided'))
+    else
+      products_db.products.save product, (err, res) ->
+        console.log res
 
-  products_db.products.save product, (err, res) ->
-    console.log res
+      # Handle response
+        return
+  else
+    err = next(new Error('title not provided'))
 
-    # Handle response
-    return
-
-  next()
+  if err
+    next(err)
+  else
+    next()
   return

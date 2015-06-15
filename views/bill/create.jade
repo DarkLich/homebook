@@ -15,7 +15,7 @@ block content
           .input-group
             input.form-control.shop-title(name="shop" type="text", data-provide="typeahead", autocomplete="off")
             span.input-group-btn
-              button.btn.btn-default.add-shop(type="button" disabled=true)
+              button.btn.btn-default.add-shop.add-button(type="button" disabled=true)
                 span.glyphicon.glyphicon-plus
         input.shop-id(name='shop_id', type='hidden')
         label.col-md-2.control-label Дата
@@ -39,7 +39,7 @@ block content
             .input-group
               input.form-control.product-title(name="title" type="text", data-provide="typeahead", autocomplete="off")
               span.input-group-btn
-                button.btn.btn-default.add-purchase(type="button" disabled=true)
+                button.btn.btn-default.add-purchase.add-button(type="button" disabled=true)
                   span.glyphicon.glyphicon-plus
             //input.form-control.product-title.typeahead(name="title" type="text", data-provide="typeahead", autocomplete="off")
             input.product-id(name='product_id', type='hidden')
