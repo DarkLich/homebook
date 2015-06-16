@@ -11,7 +11,7 @@ module.exports = (req, response, next) ->
       response.body = {success: false, err: 'category_id not provided'}
       next()
     else
-      products_db.products.save product, (err, res) ->
+      products_db.save product, (err, res) ->
         io.show('продукт'+req.body.title+'успешно создан', 'success')
         response.body = {success: true, id: res.id}
         next()

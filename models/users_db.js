@@ -6,6 +6,6 @@
 
   users_db = couch.getDb('h_users', function() {});
 
-  module.exports.users = users_db;
+  module.exports = users_db;
 
 }).call(this);

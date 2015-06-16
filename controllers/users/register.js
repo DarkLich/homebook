@@ -6,16 +6,16 @@
   users_db = require('../../models/users_db');
 
   module.exports = function(req, res, next) {
-    users_db.users.get(req.body.email, function(err, doc) {
+    users_db.get(req.body.email, function(err, doc) {
       if (err && err.error === 'not_found') {
-        users_db.users.save(req.body.email, {
+        users_db.save(req.body.email, {
           email: req.body.email,
           name: req.body.email,
           password: req.body.password,
           roles: ['ROLE_USER'],
           type: 'user'
         }, function(err, res) {});
-        return users_db.users.addUser(req.body.email, req.body.password, ['ROLE_USER'], function(err, res) {
+        return users_db.addUser(req.body.email, req.body.password, ['ROLE_USER'], function(err, res) {
           console.log(res);
         });
       }

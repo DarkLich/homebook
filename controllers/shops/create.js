@@ -10,7 +10,7 @@
   module.exports = function(req, response, next) {
     var shop;
     shop = req.body;
-    shops_db.shops.save(shop, function(err, res) {
+    shops_db.save(shop, function(err, res) {
       if (err) {
         return;
       }

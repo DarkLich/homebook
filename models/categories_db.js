@@ -23,6 +23,6 @@
     });
   });
 
-  module.exports.categories = categories_db;
+  module.exports = categories_db;
 
 }).call(this);

@@ -23,7 +23,7 @@
       if (absent_products > 0) {
         return _.each(bill.purchases, function(item, k) {
           if (!item.product_id) {
-            return products_db.products.save({
+            return products_db.save({
               title: item.title
             }, function(err, res) {
               item.product_id = res.id;
@@ -39,12 +39,12 @@
       }
     };
     saveBill = function(bill) {
-      purchases_db.purchases.save(bill.purchases, function(err, res) {
+      purchases_db.save(bill.purchases, function(err, res) {
         bill.purchases = [];
         _.each(res, function(v) {
           return bill.purchases.push(v.id);
         });
-        bills_db.bills.save(bill, function(err, res) {
+        bills_db.save(bill, function(err, res) {
           io.show('чек из ' + bill.shop_title + ' от ' + bill.date + ' успешно создан', 'success');
           response.body = {
             success: true,
@@ -57,7 +57,7 @@
     saveShop = function(bill, cb) {
       if (bill.shop_title) {
         if (!bill.shop_id) {
-          shops_db.shops.save({
+          shops_db.save({
             title: bill.shop_title
           }, function(err, res) {
             bill.shop_id = res.id;

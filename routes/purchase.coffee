@@ -1,6 +1,6 @@
 express = require('express')
 router = express.Router()
-bills = require('../controllers/bills')
+purchases = require('../controllers/purchases')
 
 # Доступ к чекам только для залогиненых юзеров
 #router.use '/*', (req, res, next) ->
@@ -11,18 +11,15 @@ bills = require('../controllers/bills')
 #  return
 
 
-router.get '/create', (req, res, next) ->
-#  console.log 'get'
-  res.render 'bill/create'
-  return
+#router.get '/create', (req, res, next) ->
+##  console.log 'get'
+#  res.render '/create'
+#  return
 
-router.get '/all', bills.all, (req, res, next) ->
+router.get '/all', purchases.all, (req, res, next) ->
   console.log 'get all'
-  res.render 'bill/all'
+  res.render 'purchase/all'
   return
 
-router.post '/create', bills.create, (req, res, next) ->
-  res.send res.body
-  return
 
 module.exports = router

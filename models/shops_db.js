@@ -16,6 +16,6 @@
     });
   });
 
-  module.exports.shops = shops_db;
+  module.exports = shops_db;
 
 }).call(this);

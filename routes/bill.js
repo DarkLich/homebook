@@ -12,6 +12,11 @@
     res.render('bill/create');
   });
 
+  router.get('/all', bills.all, function(req, res, next) {
+    console.log('get all');
+    res.render('bill/all');
+  });
+
   router.post('/create', bills.create, function(req, res, next) {
     res.send(res.body);
   });

@@ -4,8 +4,16 @@
 
   couch = require('./couch');
 
-  bills_db = couch.getDb('h_bills', function() {});
+  bills_db = couch.getDb('h_bills', function() {
+    bills_db.save('_design/all', {
+      all: {
+        map: function(doc) {
+          return emit(doc.date, null);
+        }
+      }
+    });
+  });
 
-  module.exports.bills = bills_db;
+  module.exports = bills_db;
 
 }).call(this);

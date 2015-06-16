@@ -8,7 +8,7 @@
   categories_db = require('../../models/categories_db');
 
   module.exports = function(req, res, next) {
-    categories_db.categories.view('all/all', {
+    categories_db.view('all/all', {
       include_docs: true
     }, function(err, docs) {
       var items;

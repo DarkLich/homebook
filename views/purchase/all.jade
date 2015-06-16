@@ -1,0 +1,30 @@
+extends ../layout
+
+block scripts
+  script(src='/js/create_bill.js')
+
+block content
+  h4 Покупки
+  if error
+    h4(style="color: red")= error
+  .container-fluid
+    table.table.table-hover
+      thead
+        tr
+          th #
+          th ID
+          th Магазин
+          th Продукт
+          th Цена
+          th Дата
+          th Оператор
+      tbody
+        each bill, key in purchases
+          tr
+            th(scope="row")= key+1
+            td= bill.id
+            td= bill.doc.shop
+            td= bill.doc.title
+            td= bill.doc.price
+            td= bill.doc.date
+            td= bill.doc.creator

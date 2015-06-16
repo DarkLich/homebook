@@ -7,13 +7,13 @@ _ = require('lodash')
 module.exports = (req, response, next) ->
   category = req.body
 
-  categories_db.categories.view 'byTitle/byTitle', {key: req.body.title, include_docs: true}, (err, docs)->
+  categories_db.view 'byTitle/byTitle', {key: req.body.title, include_docs: true}, (err, docs)->
     if docs.length > 0
       io.show('категория'+req.body.title+'уже существует', 'error')
       response.body = {success: false}
       next()
     else
-      categories_db.categories.save category, (err, res) ->
+      categories_db.save category, (err, res) ->
         if err
           io.show('ошибка при создании категории'+req.body.title, 'error', err)
           response.body = {success: false, err: err}

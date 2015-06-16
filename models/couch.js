@@ -106,6 +106,9 @@
       var db;
       db = con.database(base);
       return db.destroy(function(err, res) {
+        getDb(base, function() {
+          return console.log('created');
+        });
         console.log('destroy db');
         console.log(err);
         return console.log(res);

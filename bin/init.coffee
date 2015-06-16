@@ -15,7 +15,7 @@ passport.use new LocalStrategy({
 #    console.log 'PASSSPORT'
 #    console.log email
 #    console.log password
-    users_db.users.get email, (err, doc) ->
+    users_db.get email, (err, doc) ->
       if err
         done(err)
       else if doc
@@ -33,7 +33,7 @@ passport.serializeUser (user, done) ->
   return
 passport.deserializeUser (id, done) ->
   # query the current user from database
-  users_db.users.get(id, (err, doc) ->
+  users_db.get(id, (err, doc) ->
     if err
       return done new Error('User ' + id + ' does not exist')
 

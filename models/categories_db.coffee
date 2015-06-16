@@ -11,4 +11,4 @@ categories_db = couch.getDb('h_categories', ()->
   return
 )
 
-module.exports.categories = categories_db
+module.exports = categories_db

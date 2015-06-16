@@ -8,7 +8,7 @@
   products_db = require('../../models/products_db');
 
   module.exports = function(req, res, next) {
-    products_db.products.view('all/all', {
+    products_db.view('all/all', {
       include_docs: true
     }, function(err, docs) {
       var items;

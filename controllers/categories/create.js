@@ -12,7 +12,7 @@
   module.exports = function(req, response, next) {
     var category;
     category = req.body;
-    categories_db.categories.view('byTitle/byTitle', {
+    categories_db.view('byTitle/byTitle', {
       key: req.body.title,
       include_docs: true
     }, function(err, docs) {
@@ -23,7 +23,7 @@
         };
         next();
       } else {
-        categories_db.categories.save(category, function(err, res) {
+        categories_db.save(category, function(err, res) {
           if (err) {
             io.show('ошибка при создании категории' + req.body.title, 'error', err);
             response.body = {

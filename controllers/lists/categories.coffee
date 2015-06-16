@@ -3,7 +3,7 @@ _ = require('lodash')
 categories_db = require('../../models/categories_db')
 
 module.exports = (req, res, next)->
-  categories_db.categories.view 'all/all', {include_docs: true}, (err, docs)->
+  categories_db.view 'all/all', {include_docs: true}, (err, docs)->
     items = []
     _.each docs, (val)->
       items.push

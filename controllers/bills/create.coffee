@@ -13,7 +13,7 @@ module.exports = (req, response, next) ->
     if absent_products > 0
       _.each bill.purchases, (item, k)->
         if !item.product_id
-          products_db.products.save {title: item.title}, (err, res)->
+          products_db.save {title: item.title}, (err, res)->
             item.product_id = res.id
 
             counter++
@@ -25,12 +25,12 @@ module.exports = (req, response, next) ->
 
 
   saveBill = (bill)->
-    purchases_db.purchases.save bill.purchases, (err, res) ->
+    purchases_db.save bill.purchases, (err, res) ->
       bill.purchases = []
       _.each res, (v)->
         bill.purchases.push v.id
 
-      bills_db.bills.save bill, (err, res) ->
+      bills_db.save bill, (err, res) ->
         io.show('чек из ' + bill.shop_title + ' от ' + bill.date + ' успешно создан', 'success')
         response.body = {success:true, id: res.id}
         next()
@@ -41,7 +41,7 @@ module.exports = (req, response, next) ->
   saveShop = (bill, cb)->
     if bill.shop_title
       if !bill.shop_id
-        shops_db.shops.save {title: bill.shop_title}, (err, res)->
+        shops_db.save {title: bill.shop_title}, (err, res)->
           bill.shop_id = res.id
           cb()
       else

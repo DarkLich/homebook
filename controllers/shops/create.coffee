@@ -6,7 +6,7 @@ io = require('../io')
 module.exports = (req, response, next) ->
   shop = req.body
 
-  shops_db.shops.save shop, (err, res) ->
+  shops_db.save shop, (err, res) ->
     if err
       return
     io.show('магазин'+req.body.title+'успешно создан', 'success')

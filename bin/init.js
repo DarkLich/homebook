@@ -18,7 +18,7 @@
     usernameField: 'email',
     passwordField: 'password'
   }, function(email, password, done) {
-    users_db.users.get(email, function(err, doc) {
+    users_db.get(email, function(err, doc) {
       if (err) {
         return done(err);
       } else if (doc) {
@@ -42,7 +42,7 @@
   });
 
   passport.deserializeUser(function(id, done) {
-    users_db.users.get(id, function(err, doc) {
+    users_db.get(id, function(err, doc) {
       if (err) {
         return done(new Error('User ' + id + ' does not exist'));
       }

@@ -19,7 +19,7 @@
         };
         next();
       } else {
-        products_db.products.save(product, function(err, res) {
+        products_db.save(product, function(err, res) {
           io.show('продукт' + req.body.title + 'успешно создан', 'success');
           response.body = {
             success: true,

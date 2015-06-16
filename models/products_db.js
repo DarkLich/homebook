@@ -16,6 +16,6 @@
     });
   });
 
-  module.exports.products = products_db;
+  module.exports = products_db;
 
 }).call(this);

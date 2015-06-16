@@ -8,4 +8,4 @@ shops_db = couch.getDb('h_shops', ()->
   return
 )
 
-module.exports.shops = shops_db
+module.exports = shops_db

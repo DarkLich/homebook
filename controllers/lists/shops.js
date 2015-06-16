@@ -8,7 +8,7 @@
   shops_db = require('../../models/shops_db');
 
   module.exports = function(req, res, next) {
-    shops_db.shops.view('all/all', {
+    shops_db.view('all/all', {
       include_docs: true
     }, function(err, docs) {
       var items;

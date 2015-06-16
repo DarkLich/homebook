@@ -84,6 +84,9 @@ clearBase = ()->
   _.each replicateBases, (base)->
     db = con.database(base)
     db.destroy (err, res)->
+      getDb(base,()->
+        console.log 'created'
+      )
       console.log 'destroy db'
       console.log err
       console.log res
