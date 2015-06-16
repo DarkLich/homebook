@@ -17,7 +17,9 @@ module.exports.init = (server)->
 module.exports.show = (text, type, data) ->
   data = data || null
   type = if !type then 'success' else type
+  io.sockets.emit(type, { message: text, data: data })
   setTimeout(()->
+    text = '(дубль) ' + text
     io.sockets.emit(type, { message: text, data: data })
   , 3000)
   return

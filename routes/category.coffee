@@ -16,7 +16,7 @@ router.get '/create', (req, res, next) ->
   return
 
 router.post '/create', category.create, (req, res, next) ->
-  res.send {success: true}
+  res.send(res.body)
   return
 
 

@@ -9,6 +9,7 @@ module.exports = (req, res, next)->
       items.push
         name: val.doc.title
         id: val.id
+        kind: val.doc.kind
     res.send items
 
   next()

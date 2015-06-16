@@ -16,7 +16,8 @@
       _.each(docs, function(val) {
         return items.push({
           name: val.doc.title,
-          id: val.id
+          id: val.id,
+          kind: val.doc.kind
         });
       });
       return res.send(items);

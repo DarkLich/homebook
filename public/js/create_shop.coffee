@@ -1,16 +1,16 @@
-setCategoryTypeahead = ->
-  $('.category-title').typeahead({
+setShopTypeahead = ->
+  $('.shop-title').typeahead({
     source: (query, process) ->
-      $.get '/list/categories', { query: query }, (data) ->
+      $.get '/list/shops', { query: query }, (data) ->
         process data
     autoSelect: true
   })
 
 $ ->
-  setCategoryTypeahead()
+  setShopTypeahead()
 
-  $('#create_category').off 'submit'
-  $('#create_category').on 'submit', (e)->
+  $('#create_shop').off 'submit'
+  $('#create_shop').on 'submit', (e)->
     form = $(this)
     e.preventDefault()
     globals.sendForm(form, (data)->
@@ -18,17 +18,18 @@ $ ->
         $('.submit-button').hide()
         $('.next-button').show().focus()
     )
+    return false
 
-  $(document).on 'change', '.category-title', (e)->
+  $(document).on 'change', '.shop-title', (e)->
     input = $(e.currentTarget)
-    parent = input.closest('.form-group')
+    parent = input.closest('.input-group')
     current = input.typeahead('getActive')
-
     #    console.log current.name.toLowerCase() is input.val().toLowerCase()
     if current
       # Some item from your model is active!
       if current.name.toLowerCase() is input.val().toLowerCase()
-        $('.shop-id').val(current.id)
+        $('.category-id').val(current.id)
+        $('.product-kind').val(current.kind)
         globals.togglePlusButton(parent, 'disable')
         # This means the exact match is found. Use toLowerCase() if you want case insensitive match.
       else
@@ -39,3 +40,5 @@ $ ->
       globals.togglePlusButton(parent, 'enable')
     # Nothing is active so it is a new value (or maybe empty value)
     return
+
+  return

@@ -13,10 +13,12 @@ block content
         label.col-md-2.col-md-offset-1.control-label Класс
         .col-md-2
           select.form-control(name='kind')
-            option(value='food') Еда
-            option(value='other') Другое
+            option(value='Еда') Еда
+            option(value='Другое') Другое
       .form-group
         label.col-md-2.col-md-offset-1.control-label Наименование
         .col-md-2
           input.form-control.category-title(name='title', type='text', data-provide="typeahead", autocomplete="off")
-      button.col-md-offset-1.btn.btn-success(type='submit') Отправить
+      .form-group
+        button.col-md-2.col-md-offset-1.btn.btn-success.submit-button(type='submit') Отправить
+        a.col-md-2.col-md-offset-3.btn.btn-success.next-button.absent(href='/category/create') Далее

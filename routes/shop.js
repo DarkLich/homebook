@@ -8,6 +8,14 @@
 
   shops = require('../controllers/shops');
 
+  router.get('/create', function(req, res, next) {
+    res.render('shop/create');
+  });
+
+  router.post('/create', shops.create, function(req, res, next) {
+    res.send(res.body);
+  });
+
   module.exports = router;
 
 }).call(this);

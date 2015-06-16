@@ -14,9 +14,7 @@
   });
 
   router.post('/create', category.create, function(req, res, next) {
-    res.send({
-      success: true
-    });
+    res.send(res.body);
   });
 
   module.exports = router;

@@ -1,18 +1,17 @@
 'use strict'
 
 shops_db = require('../../models/shops_db')
+io = require('../io')
 
-module.exports = (req, res, next) ->
-  console.log 'CREATION'
-  console.log(req.body)
-
+module.exports = (req, response, next) ->
   shop = req.body
 
   shops_db.shops.save shop, (err, res) ->
-    console.log res
-
-    # Handle response
+    if err
+      return
+    io.show('магазин'+req.body.title+'успешно создан', 'success')
+    response.body = {success: true, id: res.id}
+    next()
     return
 
-  next()
   return

@@ -8,7 +8,7 @@ router.get '/create', (req, res, next) ->
   return
 #
 router.post '/create', products.create, (req, res, next) ->
-  res.render 'product/create'
+  res.send(res.body)
   return
 
 module.exports = router

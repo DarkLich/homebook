@@ -9,7 +9,7 @@
 
   _ = require('lodash');
 
-  module.exports = function(req, res, next) {
+  module.exports = function(req, response, next) {
     var category;
     category = req.body;
     categories_db.categories.view('byTitle/byTitle', {
@@ -17,18 +17,31 @@
       include_docs: true
     }, function(err, docs) {
       if (docs.length > 0) {
-        return io.show('категория' + req.body.title + 'уже существует', 'error');
+        io.show('категория' + req.body.title + 'уже существует', 'error');
+        response.body = {
+          success: false
+        };
+        next();
       } else {
-        return categories_db.categories.save(category, function(err, res) {
+        categories_db.categories.save(category, function(err, res) {
           if (err) {
             io.show('ошибка при создании категории' + req.body.title, 'error', err);
+            response.body = {
+              success: false,
+              err: err
+            };
           } else {
             io.show('категория ' + req.body.title + ' успешно создана', 'success');
+            response.body = {
+              success: true,
+              id: res.id,
+              kind: req.body.kind
+            };
           }
+          next();
         });
       }
     });
-    next();
   };
 
 }).call(this);

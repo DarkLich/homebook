@@ -1,24 +1,22 @@
 'use strict'
 
 products_db = require('../../models/products_db')
+io = require('../io')
 
-module.exports = (req, res, next) ->
-  err = null
+module.exports = (req, response, next) ->
   product = req.body
   if req.body.title
     if req.body.category and !req.body.category_id
-      err = next(new Error('category_id not provided'))
+      response.body = {success: false, err: 'category_id not provided'}
+      next()
     else
       products_db.products.save product, (err, res) ->
-        console.log res
-
-      # Handle response
+        io.show('продукт'+req.body.title+'успешно создан', 'success')
+        response.body = {success: true, id: res.id}
+        next()
         return
   else
-    err = next(new Error('title not provided'))
-
-  if err
-    next(err)
-  else
+    response.body = {success: false, err: 'title not provided'}
     next()
+
   return

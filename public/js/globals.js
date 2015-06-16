@@ -17,13 +17,15 @@
     }
   };
 
-  globals.sendForm = function(form) {
+  globals.sendForm = function(form, cb) {
     $.ajax({
       type: "POST",
       url: form.attr('action'),
       data: form.serialize(),
       success: function(data) {
-        return console.log(data);
+        if (typeof cb === 'function') {
+          return cb(data);
+        }
       }
     });
   };

@@ -17,7 +17,12 @@
   module.exports.show = function(text, type, data) {
     data = data || null;
     type = !type ? 'success' : type;
+    io.sockets.emit(type, {
+      message: text,
+      data: data
+    });
     setTimeout(function() {
+      text = '(дубль) ' + text;
       return io.sockets.emit(type, {
         message: text,
         data: data

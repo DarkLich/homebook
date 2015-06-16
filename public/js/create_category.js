@@ -17,6 +17,18 @@
 
   $(function() {
     setCategoryTypeahead();
+    $('#create_category').off('submit');
+    $('#create_category').on('submit', function(e) {
+      var form;
+      form = $(this);
+      e.preventDefault();
+      return globals.sendForm(form, function(data) {
+        if (data.success) {
+          $('.submit-button').hide();
+          return $('.next-button').show().focus();
+        }
+      });
+    });
     return $(document).on('change', '.category-title', function(e) {
       var current, input, parent;
       input = $(e.currentTarget);

@@ -13,7 +13,7 @@
   });
 
   router.post('/create', products.create, function(req, res, next) {
-    res.render('product/create');
+    res.send(res.body);
   });
 
   module.exports = router;

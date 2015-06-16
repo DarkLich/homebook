@@ -14,12 +14,13 @@ globals.togglePlusButton = (parent, state)->
     parent.find('input').removeClass('warning-field')
   return
 
-globals.sendForm = (form)->
+globals.sendForm = (form, cb)->
   $.ajax(
     type: "POST"
     url: form.attr('action')
     data: form.serialize()
     success: (data)->
-      console.log(data)
+      if typeof cb is 'function'
+        cb(data)
   )
   return
