@@ -93,8 +93,8 @@
             $('.category-id').val(data.id);
             modal.modal('hide');
             form[0].reset();
-            $('.add-button').attr('disabled', true);
-            return $('.add-button .glyphicon').removeClass('red-text');
+            modal.find('.add-button').attr('disabled', true);
+            return modal.find('.add-button .glyphicon').removeClass('red-text');
           }
         });
         return false;
