@@ -21,8 +21,8 @@ $ ->
         $('.submit-button').hide()
         $('.next-button').show().focus()
     )
-
     return false
+
   $('#new_category').on 'show.bs.modal', (e)->
     modal = $(this)
     modal.find('.category-title').val($('.product-category').val())

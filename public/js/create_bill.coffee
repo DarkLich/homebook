@@ -1,11 +1,6 @@
 addPurchaseLine = ->
   new_line = $('.product-params').first().clone()
   new_line.removeClass('hidden-group')
-#  $(':input', new_line).val(null)
-#  $('.product-title.dropdown-menu', new_line).remove()
-#  $('.add-purchase', new_line).attr('disabled', true)
-#  $('.add-purchase .glyphicon', new_line).removeClass('red-text')
-#  $('input[name="title"]', new_line).removeClass('warning-field')
 
   $('.products').append(new_line)
   setPurchaseTypeahead()
@@ -26,25 +21,72 @@ setShopTypeahead = ->
     autoSelect: true
   })
 
+setCategoryTypeahead = ->
+  $('.product-category').typeahead({
+    source: (query, process) ->
+      $.get '/list/categories', { query: query }, (data) ->
+        process data
+    autoSelect: true
+  })
+
 $ ->
   addPurchaseLine()
 
   current_date = new Date()
   $('#bill_date').val(current_date.toJSON().slice(0,10))
 
-  $('#create_bill').submit (e)->
-    form = this
-#    e.preventDefault()
+  $(document).off 'click', '.add-product'
+  $(document).on 'click', '.add-product', (e)->
+    parent = $(e.currentTarget).closest('.product-params')
 
-#    $('.product-params').each(->
-#      product = {}
-#      product.title = $('[name="title"]', this)
-#      console.log product
-##      console.log this
-#    )
+    modal = $('#new_product')
+    modal.modal('show')
+    modal.find('input[name="title"]').val(parent.find('.product-title').val())
 
-    console.log $(form).serialize()
-    console.log $(form).serializeArray()
+    $('#create_product').off 'submit'
+    $('#create_product').on 'submit', (e)->
+      form = $(this)
+      e.preventDefault()
+      globals.sendForm(form, (data)->
+        if data.success
+          parent.find('.product-id').val(data.id)
+          $('#new_product').modal('hide')
+          form[0].reset()
+          parent.find('.add-button').attr('disabled',true)
+          parent.find('.add-button .glyphicon').removeClass('red-text')
+      )
+      return false
+
+  $('#new_category').on 'show.bs.modal', (e)->
+    modal = $(this)
+    modal.find('.category-title').val($('.product-category').val())
+
+    $('#create_category').off 'submit'
+    $('#create_category').on 'submit', (e)->
+      form = $(this)
+      e.preventDefault()
+      globals.sendForm(form, (data)->
+        if data.success
+          $('.product-kind').val(data.kind)
+          $('.category-id').val(data.id)
+          modal.modal('hide')
+          form[0].reset()
+          $('.add-button').attr('disabled',true)
+          $('.add-button .glyphicon').removeClass('red-text')
+      )
+      return false
+    return
+
+  $('#create_bill').off 'submit'
+  $('#create_bill').on 'submit', (e)->
+    form = $(this)
+    e.preventDefault()
+    globals.sendForm(form, (data)->
+      if data.success
+        $('.submit-button').hide()
+        $('.next-button').show().focus()
+    )
+    return false
 
   $(document).on 'change', '.product-title', (e)->
     if $('.product-title').last().val() isnt ''
@@ -58,6 +100,7 @@ $ ->
 #    return false
   setPurchaseTypeahead()
   setShopTypeahead()
+  setCategoryTypeahead()
 
   replaceKoma = (val)->
     return val.replace(/,/ , '.')
@@ -128,4 +171,25 @@ $ ->
     else
       globals.togglePlusButton(parent, 'enable')
       # Nothing is active so it is a new value (or maybe empty value)
+    return
+
+  $(document).on 'change', '.product-category', (e)->
+    input = $(e.currentTarget)
+    parent = input.closest('.input-group')
+    current = input.typeahead('getActive')
+    #    console.log current.name.toLowerCase() is input.val().toLowerCase()
+    if current
+      # Some item from your model is active!
+      if current.name.toLowerCase() is input.val().toLowerCase()
+        $('.category-id').val(current.id)
+        $('.product-kind').val(current.kind)
+        globals.togglePlusButton(parent, 'disable')
+        # This means the exact match is found. Use toLowerCase() if you want case insensitive match.
+      else
+        globals.togglePlusButton(parent, 'enable')
+      # This means it is only a partial match, you can either add a new item
+      # or take the active if you don't want new items
+    else
+      globals.togglePlusButton(parent, 'enable')
+    # Nothing is active so it is a new value (or maybe empty value)
     return

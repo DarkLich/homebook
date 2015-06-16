@@ -39,9 +39,8 @@ block content
             .input-group
               input.form-control.product-title(name="title" type="text", data-provide="typeahead", autocomplete="off")
               span.input-group-btn
-                button.btn.btn-default.add-purchase.add-button(type="button" disabled=true)
+                button.btn.btn-default.add-product.add-button(type="button" disabled=true)
                   span.glyphicon.glyphicon-plus
-            //input.form-control.product-title.typeahead(name="title" type="text", data-provide="typeahead", autocomplete="off")
             input.product-id(name='product_id', type='hidden')
           .col-md-2
             input.form-control.product-sum(name='sum', type='text')
@@ -61,3 +60,55 @@ block content
       .form-group
         button.col-md-2.col-md-offset-1.btn.btn-success.submit-button(type='submit') Отправить
         a.col-md-2.col-md-offset-3.btn.btn-success.next-button.absent(href='/bill/create') Далее
+
+  // Modal
+  #new_product.modal.fade(tabindex='-1', role='dialog', aria-labelledby='new_product_label', aria-hidden='true')
+    .modal-dialog
+      .modal-content
+        .modal-header
+          button.close(type='button', data-dismiss='modal', aria-label='Close')
+            span(aria-hidden='true') ×
+          h4#new_product_label.modal-title Добавить продукт
+        .modal-body
+          .container-fluid
+            form#create_product.form-horizontal(action='/product/create' method='post')
+              .form-group
+                label.col-md-3.col-md-offset-1.control-label Наименование
+                .col-md-7
+                  input.form-control(name='title', type='text', readonly=true)
+              .form-group
+                label.col-md-3.col-md-offset-1.control-label Класс
+                .col-md-7
+                  input.form-control.product-kind(name='kind', type='text', readonly='true')
+              .form-group
+                label.col-md-3.col-md-offset-1.control-label Категория
+                .col-md-7
+                  .input-group
+                    input.form-control.product-category(name="category" type="text", data-provide="typeahead", autocomplete="off")
+                    span.input-group-btn
+                      button.btn.btn-default.add-category.add-button(type="button", disabled=true, data-toggle='modal', data-target='#new_category')
+                        span.glyphicon.glyphicon-plus
+                input.category-id(name='category_id', type='hidden')
+              button.col-md-offset-1.btn.btn-success(type='submit') Отправить
+
+  #new_category.modal.fade(tabindex='-1', role='dialog', aria-labelledby='new_category_label', aria-hidden='true')
+    .modal-dialog
+      .modal-content
+        .modal-header
+          button.close(type='button', data-dismiss='modal', aria-label='Close')
+            span(aria-hidden='true') ×
+          h4#new_category_label.modal-title Добавить категорию
+        .modal-body
+          .container-fluid
+            form#create_category.form-horizontal(action='/category/create' method='post')
+              .form-group
+                label.col-md-4.col-md-offset-1.control-label Класс
+                .col-md-6
+                  select.form-control(name='kind')
+                    option(value='Еда') Еда
+                    option(value='Другое') Другое
+              .form-group
+                label.col-md-4.col-md-offset-1.control-label Наименование
+                .col-md-6
+                  input.form-control.category-title(name='title', type='text', readonly=true)
+              button.col-md-offset-1.btn.btn-success(type='submit') Отправить

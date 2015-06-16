@@ -7,7 +7,49 @@ products_db = require('../../models/products_db')
 shops_db = require('../../models/shops_db')
 io = require('../io')
 
-module.exports = (req, res, next) ->
+module.exports = (req, response, next) ->
+  processSaving = (bill, absent_products)->
+    counter = 0
+    if absent_products > 0
+      _.each bill.purchases, (item, k)->
+        if !item.product_id
+          products_db.products.save {title: item.title}, (err, res)->
+            item.product_id = res.id
+
+            counter++
+            if counter is absent_products
+              saveBill(bill)
+    else
+      saveBill(bill)
+
+
+
+  saveBill = (bill)->
+    purchases_db.purchases.save bill.purchases, (err, res) ->
+      bill.purchases = []
+      _.each res, (v)->
+        bill.purchases.push v.id
+
+      bills_db.bills.save bill, (err, res) ->
+        io.show('чек из ' + bill.shop_title + ' от ' + bill.date + ' успешно создан', 'success')
+        response.body = {success:true, id: res.id}
+        next()
+        return
+      return
+    return
+
+  saveShop = (bill, cb)->
+    if bill.shop_title
+      if !bill.shop_id
+        shops_db.shops.save {title: bill.shop_title}, (err, res)->
+          bill.shop_id = res.id
+          cb()
+      else
+        cb()
+    else
+
+    return
+
   if req.user
     body = req.body
     bill =
@@ -43,48 +85,10 @@ module.exports = (req, res, next) ->
           if bill.purchases.length > 0
             processSaving(bill, absent_products)
       else
-        err = new Error('No shop provided')
-        err.status = 500
-        next err
-  next()
-  return
-
-saveShop = (bill, cb)->
-  if bill.shop_title
-    if !bill.shop_id
-      shops_db.shops.save {title: bill.shop_title}, (err, res)->
-        bill.shop_id = res.id
-        cb()
-    else
-      cb()
+        io.show('Не указан магазин', 'error')
+        response.body = {success: false, message: 'Не указан магазин'}
   else
+    io.show('Пользователь не зарегистрирован', 'error')
+    response.body = {success: false, message: 'Пользователь не зарегистрирован'}
 
-  return
-
-processSaving = (bill, absent_products)->
-  counter = 0
-  if absent_products > 0
-    _.each bill.purchases, (item, k)->
-      if !item.product_id
-        products_db.products.save {title: item.title}, (err, res)->
-          item.product_id = res.id
-
-          counter++
-          if counter is absent_products
-            saveBill(bill)
-  else
-    saveBill(bill)
-
-
-
-saveBill = (bill)->
-  purchases_db.purchases.save bill.purchases, (err, res) ->
-    bill.purchases = []
-    _.each res, (v)->
-      bill.purchases.push v.id
-
-    bills_db.bills.save bill, (err, res) ->
-      io.show('чек из ' + bill.shop_title + ' от ' + bill.date + ' успешно создан', 'success')
-      return
-    return
   return

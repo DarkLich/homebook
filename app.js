@@ -75,7 +75,7 @@
   app.use(passport.session());
 
   app.use(function(req, res, next) {
-    res.locals.app_version = '0.0.4';
+    res.locals.app_version = '0.0.5';
     res.locals.user = req.user;
     if (req.user) {
       res.locals.isAdmin = req.user.email === 'dark-lich@inbox.ru';

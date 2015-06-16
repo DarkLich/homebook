@@ -17,12 +17,22 @@
   });
 
   router.get('/restart', admin.restart, function(req, res, next) {
-    console.log('restart');
+    console.log('route restart');
     res.redirect('/');
   });
 
   router.get('/replicate/to', admin.replicateTo, function(req, res, next) {
-    console.log('replicate');
+    console.log('route replicate to');
+    res.redirect('/');
+  });
+
+  router.get('/replicate/from', admin.replicateFrom, function(req, res, next) {
+    console.log('route replicate from');
+    res.redirect('/');
+  });
+
+  router.get('/base/clear', admin.clearBase, function(req, res, next) {
+    console.log('route clearBase');
     res.redirect('/');
   });
 

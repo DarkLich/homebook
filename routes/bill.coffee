@@ -3,12 +3,12 @@ router = express.Router()
 bills = require('../controllers/bills')
 
 # Доступ к чекам только для залогиненых юзеров
-router.use '/*', (req, res, next) ->
-  if not req.user
-    res.redirect '/user/login'
-  else
-    next()
-  return
+#router.use '/*', (req, res, next) ->
+#  if not req.user
+#    res.redirect '/user/login'
+#  else
+#    next()
+#  return
 
 
 router.get '/create', (req, res, next) ->
@@ -17,7 +17,7 @@ router.get '/create', (req, res, next) ->
   return
 
 router.post '/create', bills.create, (req, res, next) ->
-  res.render 'bill/create'
+  res.send res.body
   return
 
 module.exports = router

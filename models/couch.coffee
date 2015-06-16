@@ -4,6 +4,9 @@ _ = require('lodash')
 adminUsername = 'root'
 adminPassword = 'StrongPassWord'
 
+allBases = ['h_users','h_products','h_shops','h_purchases','h_bills','h_categories']
+replicateBases = ['h_products','h_shops','h_purchases','h_bills','h_categories']
+
 cradle = require('cradle_security')({
   debug: true
 #  adminUsername: adminUsername
@@ -57,8 +60,6 @@ replicateTo = ()->
   remote_admin_username = adminUsername
   remote_admin_password = adminPassword
 
-  replicateBases = ['h_products','h_shops','h_purchases','h_bills','h_categories']
-
   console.log '-----------start_replicate_to-----------'
   _.each replicateBases, (base)->
     con.replicate {source: base, target:"http://"+remote_admin_username+":"+remote_admin_password+"@puppet.ingenuity.net.au:5984/"+base},(err,result)->
@@ -71,8 +72,6 @@ replicateFrom = ()->
   remote_admin_username = adminUsername
   remote_admin_password = adminPassword
 
-  replicateBases = ['h_products','h_shops','h_purchases','h_bills','h_categories']
-
   console.log '-----------start_replicate_from-----------'
   _.each replicateBases, (base)->
     con.replicate {source: "http://"+remote_admin_username+":"+remote_admin_password+"@puppet.ingenuity.net.au:5984/"+base, target: base},(err,result)->
@@ -81,6 +80,15 @@ replicateFrom = ()->
   console.log '----------finish_replicate_from-----------'
   return
 
+clearBase = ()->
+  _.each replicateBases, (base)->
+    db = con.database(base)
+    db.destroy (err, res)->
+      console.log 'destroy db'
+      console.log err
+      console.log res
+
 module.exports.getDb = getDb
 module.exports.replicateTo = replicateTo
 module.exports.replicateFrom = replicateFrom
+module.exports.clearBase = clearBase

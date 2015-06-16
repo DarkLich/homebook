@@ -11,12 +11,22 @@ router.use '/*', (req, res, next) ->
   return
 
 router.get '/restart', admin.restart, (req, res, next) ->
-  console.log 'restart'
+  console.log 'route restart'
   res.redirect '/'
   return
 
 router.get '/replicate/to', admin.replicateTo, (req, res, next) ->
-  console.log 'replicate'
+  console.log 'route replicate to'
+  res.redirect '/'
+  return
+
+router.get '/replicate/from', admin.replicateFrom, (req, res, next) ->
+  console.log 'route replicate from'
+  res.redirect '/'
+  return
+
+router.get '/base/clear', admin.clearBase, (req, res, next) ->
+  console.log 'route clearBase'
   res.redirect '/'
   return
 

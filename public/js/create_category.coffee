@@ -18,6 +18,7 @@ $ ->
         $('.submit-button').hide()
         $('.next-button').show().focus()
     )
+    return false
 
   $(document).on 'change', '.category-title', (e)->
     input = $(e.currentTarget)

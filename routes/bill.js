@@ -8,20 +8,12 @@
 
   bills = require('../controllers/bills');
 
-  router.use('/*', function(req, res, next) {
-    if (!req.user) {
-      res.redirect('/user/login');
-    } else {
-      next();
-    }
-  });
-
   router.get('/create', function(req, res, next) {
     res.render('bill/create');
   });
 
   router.post('/create', bills.create, function(req, res, next) {
-    res.render('bill/create');
+    res.send(res.body);
   });
 
   module.exports = router;

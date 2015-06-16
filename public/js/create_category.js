@@ -22,12 +22,13 @@
       var form;
       form = $(this);
       e.preventDefault();
-      return globals.sendForm(form, function(data) {
+      globals.sendForm(form, function(data) {
         if (data.success) {
           $('.submit-button').hide();
           return $('.next-button').show().focus();
         }
       });
+      return false;
     });
     return $(document).on('change', '.category-title', function(e) {
       var current, input, parent;
