@@ -8,6 +8,14 @@
 
   purchases = require('../controllers/purchases');
 
+  router.use('/*', function(req, res, next) {
+    if (!req.user) {
+      res.redirect('/user/login');
+    } else {
+      next();
+    }
+  });
+
   router.get('/all', purchases.all, function(req, res, next) {
     console.log('get all');
     res.render('purchase/all');

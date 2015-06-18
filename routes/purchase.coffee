@@ -2,13 +2,13 @@ express = require('express')
 router = express.Router()
 purchases = require('../controllers/purchases')
 
-# Доступ к чекам только для залогиненых юзеров
-#router.use '/*', (req, res, next) ->
-#  if not req.user
-#    res.redirect '/user/login'
-#  else
-#    next()
-#  return
+## Доступ к админ-действиям только для залогиненых юзеров
+router.use '/*', (req, res, next) ->
+  if not req.user
+    res.redirect '/user/login'
+  else
+    next()
+  return
 
 
 #router.get '/create', (req, res, next) ->

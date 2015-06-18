@@ -9,7 +9,7 @@
       all: {
         map: function(doc) {
           if (doc.title) {
-            return emit(doc._id, null);
+            return emit(doc.title, null);
           }
         }
       }

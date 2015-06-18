@@ -19,7 +19,7 @@ adminHandler = (req, res, next) ->
   return
 
 router.post '/login', users.login, (req, res, next) ->
-  res.redirect '/', title: 'Express'
+  res.redirect '/index', title: 'Express'
   return
 router.get '/login', (req, res, next) ->
   winston.log('info', 'Test Log Message', { anything: 'This is metadata' })
@@ -29,7 +29,7 @@ router.get '/register', (req, res, next) ->
   res.render 'user/register', title: 'Express'
   return
 router.post '/register', users.register, (req, res, next) ->
-  res.redirect '/', title: 'Express'
+  res.redirect '/index', title: 'Express'
   return
 router.get '/logout', users.logout
 router.get '/fail', (req, res, next) ->

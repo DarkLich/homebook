@@ -178,6 +178,7 @@
       input = $(e.currentTarget);
       parent = input.closest('.product-params');
       current = input.typeahead('getActive');
+      parent.find('.product-id').val(null);
       if (current) {
         if (current.name.toLowerCase() === input.val().toLowerCase()) {
           parent.find('.product-id').val(current.id);

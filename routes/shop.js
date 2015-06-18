@@ -8,6 +8,14 @@
 
   shops = require('../controllers/shops');
 
+  router.use('/*', function(req, res, next) {
+    if (!req.user) {
+      res.redirect('/user/login');
+    } else {
+      next();
+    }
+  });
+
   router.get('/create', function(req, res, next) {
     res.render('shop/create');
   });

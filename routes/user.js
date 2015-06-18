@@ -22,7 +22,7 @@
   adminHandler = function(req, res, next) {};
 
   router.post('/login', users.login, function(req, res, next) {
-    res.redirect('/', {
+    res.redirect('/index', {
       title: 'Express'
     });
   });
@@ -43,7 +43,7 @@
   });
 
   router.post('/register', users.register, function(req, res, next) {
-    res.redirect('/', {
+    res.redirect('/index', {
       title: 'Express'
     });
   });

@@ -17,10 +17,10 @@ block content
           th Дата
           th Оператор
       tbody
-        each bill, key in bills
+        each item, key in bills
           tr
             th(scope="row")= key+1
-            td= bill.id
-            td= bill.doc.shop_title
-            td= bill.doc.date
-            td= bill.doc.creator
+            td= item.id
+            td= item.doc.shop_title
+            td= item.doc.date
+            td= item.doc.creator

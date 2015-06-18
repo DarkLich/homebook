@@ -157,7 +157,7 @@ $ ->
     parent = input.closest('.product-params')
     current = input.typeahead('getActive')
 
-#    console.log current.name.toLowerCase() is input.val().toLowerCase()
+    parent.find('.product-id').val(null)
     if current
       # Some item from your model is active!
       if current.name.toLowerCase() is input.val().toLowerCase()

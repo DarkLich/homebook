@@ -19,12 +19,18 @@ block content
           th Дата
           th Оператор
       tbody
-        each bill, key in purchases
+        - var total = 0
+        each item, key in purchases
+          - console.log(item.doc.sum)
+          - total+= parseFloat(item.doc.sum)
           tr
             th(scope="row")= key+1
-            td= bill.id
-            td= bill.doc.shop
-            td= bill.doc.title
-            td= bill.doc.price
-            td= bill.doc.date
-            td= bill.doc.creator
+            td= item.id
+            td= item.doc.shop
+            td= item.doc.title
+            td= item.doc.price
+            td= item.doc.date
+            td= item.doc.creator
+      - console.log('bbbbb')
+      - console.log(total)
+    .total !{total}

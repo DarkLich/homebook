@@ -8,6 +8,14 @@
 
   category = require('../controllers/categories');
 
+  router.use('/*', function(req, res, next) {
+    if (!req.user) {
+      res.redirect('/user/login');
+    } else {
+      next();
+    }
+  });
+
   router.get('/create', function(req, res, next) {
     console.log('restart');
     res.render('category/create');
